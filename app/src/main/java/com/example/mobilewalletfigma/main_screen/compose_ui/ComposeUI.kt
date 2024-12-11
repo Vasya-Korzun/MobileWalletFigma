@@ -1,4 +1,4 @@
-package com.example.mobilewalletfigma.add_new_card.compose_ui
+package com.example.mobilewalletfigma.main_screen.compose_ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,6 +35,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
+import com.example.mobilewalletfigma.main_screen.MainIntent
+import com.example.mobilewalletfigma.main_screen.MainState
 import com.example.mobilewalletfigma.ui.theme.Blue40
 import com.example.mobilewalletfigma.ui.theme.BorderColor
 import com.example.mobilewalletfigma.ui.theme.ButtonColor
@@ -45,7 +47,11 @@ import com.example.mobilewalletfigma.ui.theme.TextButtonColor
 import com.example.mobilewalletfigma.ui.theme.TextPlaceholder
 
 @Composable
-fun AddNewCardScreen(innerPadding: PaddingValues) {
+fun AddNewCardScreen(
+    innerPadding: PaddingValues,
+    viewState: MainState,
+    dispatch: (MainIntent) -> Unit,
+) {
     Column(
         modifier = Modifier
             .padding(innerPadding)
@@ -345,7 +351,9 @@ fun PreviewAddNewCardScreen() {
         contentColor = White
     ) { innerPadding ->
         AddNewCardScreen(
-            innerPadding
+            innerPadding,
+            viewState = MainState.initial(),
+            dispatch = {}
         )
     }
 }
