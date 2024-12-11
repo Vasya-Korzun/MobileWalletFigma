@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MobileWalletFigma</string>
+
+    <string name="add_card">Добавить карту</string>
+    <string name="t_label1">XXXX  XXXX  XXXX  XXXX</string>
+    <string name="t_label2">Держатель карты</string>
+    <string name="t_label3">ММ/ГГ</string>
+    <string name="card_number">Номер карты</string>
+    <string name="card_placeholder1">0000 0000 0000 0000</string>
+    <string name="card_placeholder2">ММ/ГГ</string>
+    <string name="card_placeholder3">3 цифры</string>
+    <string name="validity_period">Срок действия</string>
+    <string name="card_cvv">CVV</string>
+    <string name="card_holder">Держатель карты</string>
+    <string name="full_name">Полное имя</string>
+    <string name="button_add">Добавить</string>
+</resources>
