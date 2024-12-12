@@ -21,6 +21,8 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
@@ -60,7 +62,7 @@ fun AddNewCardScreen(
         Spacer(modifier = Modifier.height(12.dp))
         CreditCard()
         Spacer(modifier = Modifier.height(24.dp))
-        CardInfo()
+        CardInfo(viewState, dispatch)
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = { },
@@ -187,7 +189,7 @@ fun CreditCard() {
 
 
 @Composable
-fun CardInfo() {
+fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
     Column(
         modifier = Modifier
             .padding(horizontal = 20.dp)
@@ -206,9 +208,11 @@ fun CardInfo() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        val cardNumber = remember { mutableStateOf(viewState.cardInfo.cardNumber) }    //TODO  ????
+
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = cardNumber.value,
+            onValueChange = { newText -> cardNumber.value = newText },
             placeholder = {
                 Text(
                     text = stringResource(R.string.card_placeholder1),
@@ -243,9 +247,12 @@ fun CardInfo() {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
+                val validityPeriod =
+                    remember { mutableStateOf(viewState.cardInfo.validityPeriod) }    //TODO  ????
+
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = validityPeriod.value,
+                    onValueChange = { newText -> validityPeriod.value = newText },
                     placeholder = {
                         Text(
                             text = stringResource(R.string.card_placeholder2),
@@ -280,9 +287,12 @@ fun CardInfo() {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
+                val cardCvv =
+                    remember { mutableStateOf(viewState.cardInfo.cardCvv) }    //TODO  ????
+
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = cardCvv.value,
+                    onValueChange = { newText -> cardCvv.value = newText },
                     placeholder = {
                         Text(
                             text = stringResource(R.string.card_placeholder3),
@@ -318,9 +328,11 @@ fun CardInfo() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        val cardHolder = remember { mutableStateOf(viewState.cardInfo.cardHolder) }    //TODO  ????
+
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = cardHolder.value,
+            onValueChange = { newText -> cardHolder.value = newText },
             placeholder = {
                 Text(
                     text = stringResource(R.string.full_name),

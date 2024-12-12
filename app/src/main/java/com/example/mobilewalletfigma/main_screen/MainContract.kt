@@ -12,10 +12,10 @@ data class MainState(
         fun initial() = MainState(
 
             cardInfo = CardInfo(
-                cardNumber = "0000 0000 0000 0000",
-                validityPeriod = "ММ/ГГ",
-                cardCvv = "3 цифры",
-                cardHolder = "Полное имя",
+                cardNumber = "",
+                validityPeriod = "",
+                cardCvv = "",
+                cardHolder = "",
             )
         )
     }
