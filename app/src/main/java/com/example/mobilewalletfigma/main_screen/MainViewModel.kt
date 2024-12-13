@@ -30,12 +30,28 @@ class MainViewModel : AbstractMviViewModel<MainIntent, MainState, MainEvent>() {
 
     private fun SharedFlow<MainIntent>.toPartialStateChangeFlow(): Flow<PartialStateChange> {
 
-        val initialFlow = filterIsInstance<MainIntent.InputData>().map { intent ->
-            PartialStateChange.InputData(intent.info)
+        val initialFlowCardNumber = filterIsInstance<MainIntent.InputCardNumber>().map { intent ->
+            PartialStateChange.InputCardNumber(intent.cardNumber)
+        }.shareWhileSubscribed()
+
+        val initialFlowValidityPeriod =
+            filterIsInstance<MainIntent.InputCardValidityPeriod>().map { intent ->
+                PartialStateChange.InputValidityPeriod(intent.validityPeriod)
+            }.shareWhileSubscribed()
+
+        val initialFlowCardCvv = filterIsInstance<MainIntent.InputCardCvv>().map { intent ->
+            PartialStateChange.InputCardCvv(intent.cardCvv)
+        }.shareWhileSubscribed()
+
+        val initialFlowCardHolder = filterIsInstance<MainIntent.InputCardHolder>().map { intent ->
+            PartialStateChange.InputCardHolder(intent.cardHolder)
         }.shareWhileSubscribed()
 
         return merge(
-            initialFlow
+            initialFlowCardNumber,
+            initialFlowValidityPeriod,
+            initialFlowCardCvv,
+            initialFlowCardHolder,
         )
     }
 

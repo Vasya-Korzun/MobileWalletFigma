@@ -21,8 +21,6 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
@@ -145,15 +143,15 @@ fun CreditCard() {
             Text(
                 text = stringResource(R.string.t_label1),
                 style = TextStyle(
-                    color = White,
-                    fontSize = 16.sp,
                     fontWeight = FontWeight(400),
+                    fontSize = 16.sp,
                     lineHeight = 25.6.sp,
+                    color = White,
                 ),
                 modifier = Modifier
+                    .padding(horizontal = 20.dp)
                     .width(190.dp)
                     .height(26.dp)
-                    .padding(horizontal = 20.dp)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -208,11 +206,11 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        val cardNumber = remember { mutableStateOf(viewState.cardInfo.cardNumber) }    //TODO  ????
-
         OutlinedTextField(
-            value = cardNumber.value,
-            onValueChange = { newText -> cardNumber.value = newText },
+            value = viewState.cardNumber,
+            onValueChange = { newText ->
+                dispatch(MainIntent.InputCardNumber(newText))
+            },
             placeholder = {
                 Text(
                     text = stringResource(R.string.card_placeholder1),
@@ -229,6 +227,7 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
                 focusedBorderColor = FocusedBorderColor
             ),
             shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -247,12 +246,11 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                val validityPeriod =
-                    remember { mutableStateOf(viewState.cardInfo.validityPeriod) }    //TODO  ????
-
                 OutlinedTextField(
-                    value = validityPeriod.value,
-                    onValueChange = { newText -> validityPeriod.value = newText },
+                    value = viewState.validityPeriod,
+                    onValueChange = { newText ->
+                        dispatch(MainIntent.InputCardValidityPeriod(newText))
+                    },
                     placeholder = {
                         Text(
                             text = stringResource(R.string.card_placeholder2),
@@ -287,12 +285,11 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                val cardCvv =
-                    remember { mutableStateOf(viewState.cardInfo.cardCvv) }    //TODO  ????
-
                 OutlinedTextField(
-                    value = cardCvv.value,
-                    onValueChange = { newText -> cardCvv.value = newText },
+                    value = viewState.cardCvv,
+                    onValueChange = { newText ->
+                        dispatch(MainIntent.InputCardCvv(newText))
+                    },
                     placeholder = {
                         Text(
                             text = stringResource(R.string.card_placeholder3),
@@ -328,11 +325,11 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        val cardHolder = remember { mutableStateOf(viewState.cardInfo.cardHolder) }    //TODO  ????
-
         OutlinedTextField(
-            value = cardHolder.value,
-            onValueChange = { newText -> cardHolder.value = newText },
+            value = viewState.cardHolder,
+            onValueChange = { newText ->
+                dispatch(MainIntent.InputCardHolder(newText))
+            },
             placeholder = {
                 Text(
                     text = stringResource(R.string.full_name),
@@ -349,6 +346,7 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
                 focusedBorderColor = FocusedBorderColor
             ),
             shape = RoundedCornerShape(12.dp),
+            modifier = Modifier.fillMaxWidth()
         )
 
     }

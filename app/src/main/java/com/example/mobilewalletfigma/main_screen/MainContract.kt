@@ -6,17 +6,17 @@ import com.example.testfigma1.base.MviViewState
 
 
 data class MainState(
-    val cardInfo: CardInfo
+    val cardNumber: String,
+    val validityPeriod: String,
+    val cardCvv: String,
+    val cardHolder: String,
 ) : MviViewState {
     companion object {
         fun initial() = MainState(
-
-            cardInfo = CardInfo(
-                cardNumber = "",
-                validityPeriod = "",
-                cardCvv = "",
-                cardHolder = "",
-            )
+            cardNumber = "",
+            validityPeriod = "",
+            cardCvv = "",
+            cardHolder = "",
         )
     }
 }
@@ -26,10 +26,38 @@ sealed interface PartialStateChange {
 
     fun reduce(viewState: MainState): MainState
 
-    data class InputData(val info: CardInfo) : PartialStateChange {
+    data class InputCardNumber(val cardNumber: String) : PartialStateChange {
         override fun reduce(viewState: MainState): MainState {
+            val number = cardNumber.filter { it.isDigit() }
             return viewState.copy(
-                cardInfo = info
+                cardNumber = number
+            )
+        }
+    }
+
+    data class InputValidityPeriod(val validityPeriod: String) : PartialStateChange {
+        override fun reduce(viewState: MainState): MainState {
+
+            return viewState.copy(
+                validityPeriod = validityPeriod
+            )
+        }
+    }
+
+    data class InputCardCvv(val cardCvv: String) : PartialStateChange {
+        override fun reduce(viewState: MainState): MainState {
+
+            return viewState.copy(
+                cardCvv = cardCvv
+            )
+        }
+    }
+
+    data class InputCardHolder(val cardHolder: String) : PartialStateChange {
+        override fun reduce(viewState: MainState): MainState {
+
+            return viewState.copy(
+                cardHolder = cardHolder
             )
         }
     }
@@ -37,19 +65,15 @@ sealed interface PartialStateChange {
 }
 
 
-sealed class MainIntent : MviIntent {
-    data class InputData(val info: CardInfo) : MainIntent()
+sealed interface MainIntent : MviIntent {
+    data class InputCardNumber(val cardNumber: String) : MainIntent
+    data class InputCardValidityPeriod(val validityPeriod: String) : MainIntent
+    data class InputCardCvv(val cardCvv: String) : MainIntent
+    data class InputCardHolder(val cardHolder: String) : MainIntent
 }
 
 sealed class MainEvent : MviSingleEvent
 
-
-data class CardInfo(
-    val cardNumber: String,
-    val validityPeriod: String,
-    val cardCvv: String,
-    val cardHolder: String
-)
 
 
 
