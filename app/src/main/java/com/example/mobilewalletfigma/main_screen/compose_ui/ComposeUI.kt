@@ -41,7 +41,8 @@ import com.example.mobilewalletfigma.main_screen.transformations.CvvDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults.DATE_LENGTH
 import com.example.mobilewalletfigma.main_screen.transformations.DateTransformation
-import com.example.mobilewalletfigma.main_screen.transformations.formatVisaCardNumbers
+import com.example.mobilewalletfigma.main_screen.transformations.VisaCardNumbersTransformation
+import com.example.mobilewalletfigma.main_screen.transformations.NumberDefaults
 import com.example.mobilewalletfigma.ui.theme.Blue40
 import com.example.mobilewalletfigma.ui.theme.BorderColor
 import com.example.mobilewalletfigma.ui.theme.ButtonColor
@@ -214,11 +215,11 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
         OutlinedTextField(
             value = viewState.cardNumber,
             onValueChange = { newText ->
-                dispatch(MainIntent.InputCardNumber(newText.filter { it.isDigit() }))
+                if (newText.length <= NumberDefaults.CARD_NUMBER_LENGTH) {
+                    dispatch(MainIntent.InputCardNumber(newText.filter { it.isDigit() }))
+                }
             },
-            visualTransformation = { number ->
-                formatVisaCardNumbers(number)
-            },
+            visualTransformation = VisaCardNumbersTransformation(NumberDefaults.MASK),
             placeholder = {
                 Text(
                     text = stringResource(R.string.card_placeholder1),
