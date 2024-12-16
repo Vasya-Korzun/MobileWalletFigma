@@ -37,6 +37,11 @@ import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.main_screen.MainIntent
 import com.example.mobilewalletfigma.main_screen.MainState
+import com.example.mobilewalletfigma.main_screen.transformations.CvvDefaults
+import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults
+import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults.DATE_LENGTH
+import com.example.mobilewalletfigma.main_screen.transformations.DateTransformation
+import com.example.mobilewalletfigma.main_screen.transformations.formatVisaCardNumbers
 import com.example.mobilewalletfigma.ui.theme.Blue40
 import com.example.mobilewalletfigma.ui.theme.BorderColor
 import com.example.mobilewalletfigma.ui.theme.ButtonColor
@@ -209,7 +214,10 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
         OutlinedTextField(
             value = viewState.cardNumber,
             onValueChange = { newText ->
-                dispatch(MainIntent.InputCardNumber(newText))
+                dispatch(MainIntent.InputCardNumber(newText.filter { it.isDigit() }))
+            },
+            visualTransformation = { number ->
+                formatVisaCardNumbers(number)
             },
             placeholder = {
                 Text(
@@ -227,7 +235,7 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
                 focusedBorderColor = FocusedBorderColor
             ),
             shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -249,8 +257,11 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
                 OutlinedTextField(
                     value = viewState.validityPeriod,
                     onValueChange = { newText ->
-                        dispatch(MainIntent.InputCardValidityPeriod(newText))
+                        if (newText.length <= DATE_LENGTH) {
+                            dispatch(MainIntent.InputCardValidityPeriod(newText.filter { it.isDigit() }))
+                        }
                     },
+                    visualTransformation = DateTransformation(DateDefaults.DATE_MASK),
                     placeholder = {
                         Text(
                             text = stringResource(R.string.card_placeholder2),
@@ -288,7 +299,9 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
                 OutlinedTextField(
                     value = viewState.cardCvv,
                     onValueChange = { newText ->
-                        dispatch(MainIntent.InputCardCvv(newText))
+                        if (newText.length <= CvvDefaults.CVV_LENGTH) {
+                            dispatch(MainIntent.InputCardCvv(newText.filter { it.isDigit() }))
+                        }
                     },
                     placeholder = {
                         Text(

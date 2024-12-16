@@ -28,9 +28,9 @@ sealed interface PartialStateChange {
 
     data class InputCardNumber(val cardNumber: String) : PartialStateChange {
         override fun reduce(viewState: MainState): MainState {
-            val number = cardNumber.filter { it.isDigit() }
+
             return viewState.copy(
-                cardNumber = number
+                cardNumber = cardNumber
             )
         }
     }
