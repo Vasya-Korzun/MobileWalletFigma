@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
@@ -37,12 +38,14 @@ import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.main_screen.MainIntent
 import com.example.mobilewalletfigma.main_screen.MainState
+import com.example.mobilewalletfigma.main_screen.extension_fun.changeCardHolder
+import com.example.mobilewalletfigma.main_screen.extension_fun.changeCardNumber
+import com.example.mobilewalletfigma.main_screen.extension_fun.changeValidityPeriod
 import com.example.mobilewalletfigma.main_screen.transformations.CvvDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults.DATE_LENGTH
-import com.example.mobilewalletfigma.main_screen.transformations.DateTransformation
-import com.example.mobilewalletfigma.main_screen.transformations.VisaCardNumbersTransformation
 import com.example.mobilewalletfigma.main_screen.transformations.NumberDefaults
+import com.example.mobilewalletfigma.main_screen.transformations.VisaCardTransformation
 import com.example.mobilewalletfigma.ui.theme.Blue40
 import com.example.mobilewalletfigma.ui.theme.BorderColor
 import com.example.mobilewalletfigma.ui.theme.ButtonColor
@@ -51,6 +54,13 @@ import com.example.mobilewalletfigma.ui.theme.Text40
 import com.example.mobilewalletfigma.ui.theme.Text50
 import com.example.mobilewalletfigma.ui.theme.TextButtonColor
 import com.example.mobilewalletfigma.ui.theme.TextPlaceholder
+import kotlin.random.Random
+
+
+fun getRandomColor(): Color {
+    val random = Random
+    return Color(random.nextInt(256), random.nextInt(256), random.nextInt(256))
+}
 
 @Composable
 fun AddNewCardScreen(
@@ -61,10 +71,11 @@ fun AddNewCardScreen(
     Column(
         modifier = Modifier
             .padding(innerPadding)
+            .background(getRandomColor())
     ) {
         AddCard()
         Spacer(modifier = Modifier.height(12.dp))
-        CreditCard()
+        CreditCard(viewState)
         Spacer(modifier = Modifier.height(24.dp))
         CardInfo(viewState, dispatch)
         Spacer(modifier = Modifier.weight(1f))
@@ -121,7 +132,7 @@ fun AddCard() {
 
 
 @Composable
-fun CreditCard() {
+fun CreditCard(viewState: MainState) {
     Box(
         modifier = Modifier
             .padding(horizontal = 20.dp)
@@ -147,7 +158,7 @@ fun CreditCard() {
         Column(modifier = Modifier.padding(top = 92.dp)) {
 
             Text(
-                text = stringResource(R.string.t_label1),
+                text = viewState.cardNumber.changeCardNumber(),
                 style = TextStyle(
                     fontWeight = FontWeight(400),
                     fontSize = 16.sp,
@@ -164,7 +175,7 @@ fun CreditCard() {
 
             Row(modifier = Modifier.padding(horizontal = 20.dp)) {
                 Text(
-                    text = stringResource(R.string.t_label2),
+                    text = stringResource(R.string.t_label2).changeCardHolder(viewState.cardHolder),
                     style = TextStyle(
                         color = Text40,
                         fontSize = 12.sp,
@@ -176,7 +187,8 @@ fun CreditCard() {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
-                    text = stringResource(R.string.t_label3),
+                    text = stringResource(R.string.t_label3).changeValidityPeriod(viewState.validityPeriod),
+//                    text = viewState.validityPeriod.changeValidityPeriod(),
                     style = TextStyle(
                         color = Text40,
                         fontSize = 12.sp,
@@ -219,7 +231,7 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
                     dispatch(MainIntent.InputCardNumber(newText.filter { it.isDigit() }))
                 }
             },
-            visualTransformation = VisaCardNumbersTransformation(NumberDefaults.MASK),
+            visualTransformation = VisaCardTransformation(NumberDefaults.CARD_NUMBER_MASK),
             placeholder = {
                 Text(
                     text = stringResource(R.string.card_placeholder1),
@@ -262,7 +274,7 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
                             dispatch(MainIntent.InputCardValidityPeriod(newText.filter { it.isDigit() }))
                         }
                     },
-                    visualTransformation = DateTransformation(DateDefaults.DATE_MASK),
+                    visualTransformation = VisaCardTransformation(DateDefaults.DATE_MASK),
                     placeholder = {
                         Text(
                             text = stringResource(R.string.card_placeholder2),
@@ -342,7 +354,7 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
         OutlinedTextField(
             value = viewState.cardHolder,
             onValueChange = { newText ->
-                dispatch(MainIntent.InputCardHolder(newText))
+                if (newText.length <= 30) dispatch(MainIntent.InputCardHolder(newText))
             },
             placeholder = {
                 Text(
@@ -381,3 +393,4 @@ fun PreviewAddNewCardScreen() {
         )
     }
 }
+

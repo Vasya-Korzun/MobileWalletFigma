@@ -17,7 +17,8 @@ data class MainState(
             validityPeriod = "",
             cardCvv = "",
             cardHolder = "",
-        )
+
+            )
     }
 }
 
