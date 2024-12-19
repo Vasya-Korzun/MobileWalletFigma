@@ -2,6 +2,7 @@ package com.example.mobilewalletfigma.faq_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,9 +29,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
+import com.example.mobilewalletfigma.ui.theme.ButtonColorFaq
 import com.example.mobilewalletfigma.ui.theme.ContentColor
 import com.example.mobilewalletfigma.ui.theme.GrayFaq
 import com.example.mobilewalletfigma.ui.theme.QuestionFaqText
+import com.example.mobilewalletfigma.ui.theme.TextButtonColor
 
 @Composable
 fun FaqScreen(innerPadding: PaddingValues) {
@@ -37,7 +42,11 @@ fun FaqScreen(innerPadding: PaddingValues) {
             .padding(innerPadding)
     ) {
         TopBar()
-        ContentCards()
+        ContentCards(
+            onClick = {
+
+            }
+        )
     }
 }
 
@@ -79,7 +88,7 @@ fun TopBar() {
 
 
 @Composable
-fun ContentCards() {
+fun ContentCards(onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -137,6 +146,9 @@ fun ContentCards() {
                     contentDescription = "",
                     modifier = Modifier
                         .align(alignment = Alignment.CenterVertically)
+                        .clickable {
+                            onClick()
+                        }
                 )
             }
             Row(
@@ -323,7 +335,24 @@ fun ContentCards() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        
+        Button(
+            onClick = { },
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = ButtonColorFaq)
+        ) {
+            Text(
+                stringResource(R.string.button_contact_support),
+                style = TextStyle(
+                    color = TextButtonColor,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight(600),
+                    lineHeight = 24.sp,
+                )
+            )
+        }
     }
 }
 

@@ -23,5 +23,8 @@
     <string name="card_faq_question1">Вопрос 1</string>
     <string name="card_faq_question2">Вопрос 2</string>
     <string name="card_faq_question3">Вопрос 3</string>
+    <string name="button_contact_support">Связаться с поддержкой</string>
+
+
 <!--    TODO: Lines for FAQ screen -->
 </resources>
