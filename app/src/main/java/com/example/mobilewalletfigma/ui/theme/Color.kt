@@ -33,3 +33,12 @@ val FocusedBorderColor = Color(0xff16a085)
 val TextButtonColor = Color(0xFFFFFFFF)
 val ButtonColor = Color(0xFF061737)
 
+
+
+//-------------FAQ Screen------------------
+val GrayFaq = Color(0xFF6A7487)
+val QuestionFaqText = Color(0xFF061737)
+val ContentColor = Color(0xFFF7FAFC)
+//val ContentColor = Color(0xFF838B9B)
+//-----------------------------------------
+

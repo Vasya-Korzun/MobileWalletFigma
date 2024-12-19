@@ -41,6 +41,7 @@ import com.example.mobilewalletfigma.main_screen.MainState
 import com.example.mobilewalletfigma.main_screen.extension_fun.changeCardHolder
 import com.example.mobilewalletfigma.main_screen.extension_fun.changeCardNumber
 import com.example.mobilewalletfigma.main_screen.extension_fun.changeValidityPeriod
+import com.example.mobilewalletfigma.main_screen.transformations.CarHolderDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.CvvDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults.DATE_LENGTH
@@ -188,7 +189,6 @@ fun CreditCard(viewState: MainState) {
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
                     text = stringResource(R.string.t_label3).changeValidityPeriod(viewState.validityPeriod),
-//                    text = viewState.validityPeriod.changeValidityPeriod(),
                     style = TextStyle(
                         color = Text40,
                         fontSize = 12.sp,
@@ -354,7 +354,9 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
         OutlinedTextField(
             value = viewState.cardHolder,
             onValueChange = { newText ->
-                if (newText.length <= 30) dispatch(MainIntent.InputCardHolder(newText))
+                if (newText.length <= CarHolderDefaults.CARD_HOLDER_LENGTH) {
+                    dispatch(MainIntent.InputCardHolder(newText))
+                }
             },
             placeholder = {
                 Text(

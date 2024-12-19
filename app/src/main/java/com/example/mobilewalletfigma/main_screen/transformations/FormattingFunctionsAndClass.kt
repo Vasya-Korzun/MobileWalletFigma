@@ -93,3 +93,8 @@ object CvvDefaults {
     const val CVV_LENGTH = 3
 }
 
+/** For CVV */
+object CarHolderDefaults {
+    const val CARD_HOLDER_LENGTH = 30
+}
+
