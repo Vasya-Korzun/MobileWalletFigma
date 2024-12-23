@@ -1,4 +1,4 @@
-package com.example.mobilewalletfigma.faq_screen
+package com.example.mobilewalletfigma.faq_screen.compose_ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,6 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
+import com.example.mobilewalletfigma.faq_screen.FAQIntent
+import com.example.mobilewalletfigma.faq_screen.FAQState
 import com.example.mobilewalletfigma.ui.theme.ButtonColorFaq
 import com.example.mobilewalletfigma.ui.theme.ContentColor
 import com.example.mobilewalletfigma.ui.theme.GrayFaq
@@ -38,14 +42,19 @@ import com.example.mobilewalletfigma.ui.theme.QuestionFaqText
 import com.example.mobilewalletfigma.ui.theme.TextButtonColor
 
 @Composable
-fun FaqScreen(innerPadding: PaddingValues) {
-    Column(
+fun FaqScreen(
+    innerPadding: PaddingValues,
+    viewState: FAQState,
+    dispatch: (FAQIntent) -> Unit,
+) {
+    LazyColumn(
         modifier = Modifier
             .padding(innerPadding)
     ) {
-        TopBar()
-        ContentCards()
-
+        item {
+            TopBar()
+            ContentCards()
+        }
     }
 }
 
@@ -58,6 +67,8 @@ fun PreviewFaqScreen() {
     ) { innerPadding ->
         FaqScreen(
             innerPadding,
+            viewState = FAQState.initial(),
+            dispatch = {}
         )
     }
 }
@@ -88,6 +99,14 @@ fun TopBar() {
 
 @Composable
 fun ContentCards() {
+    val state1 = remember { mutableStateOf(false) }
+    val state2 = remember { mutableStateOf(false) }
+    val state3 = remember { mutableStateOf(false) }
+    val state4 = remember { mutableStateOf(false) }
+    val state5 = remember { mutableStateOf(false) }
+    val state6 = remember { mutableStateOf(false) }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -141,8 +160,6 @@ fun ContentCards() {
                 Spacer(modifier = Modifier.weight(1f))
 
 //Todo----------------------------------------------------------------------------------------
-                val state1 = remember { mutableStateOf(false) }
-
                 if (!state1.value) {
                     Image(
                         painter = painterResource(R.drawable.icon_chevron_down_outline),
@@ -165,6 +182,14 @@ fun ContentCards() {
                     )
                 }
 //Todo----------------------------------------------------------------------------------------
+            }
+            if (state1.value) {
+                Text(
+                    text = "Hello Kotlin!askcsnnvkdjvndkvbdhjvdvbkjsnvsjkvvbdhjbvnsvbhvjhdvbdvdb" +
+                            "sjndknvdvbhdbvhdjvbdhjbdfhbffjbnfbkfgjnbgfkbgnfgjbnfbnfkbfknsnvbdkvndvdkvndkjv" +
+                            "djknvjdkvnjkdfvkdfkmvdf",
+                    color = Black
+                )
             }
             Row(
                 modifier = Modifier
@@ -190,8 +215,6 @@ fun ContentCards() {
                 Spacer(modifier = Modifier.weight(1f))
 
                 //Todo----------------------------------------------------------------------------------------
-                val state2 = remember { mutableStateOf(false) }
-
                 if (!state2.value) {
                     Image(
                         painter = painterResource(R.drawable.icon_chevron_down_outline),
@@ -239,8 +262,6 @@ fun ContentCards() {
                 Spacer(modifier = Modifier.weight(1f))
 
                 //Todo----------------------------------------------------------------------------------------
-                val state3 = remember { mutableStateOf(false) }
-
                 if (!state3.value) {
                     Image(
                         painter = painterResource(R.drawable.icon_chevron_down_outline),
@@ -317,8 +338,6 @@ fun ContentCards() {
                 Spacer(modifier = Modifier.weight(1f))
 
                 //Todo----------------------------------------------------------------------------------------
-                val state4 = remember { mutableStateOf(false) }
-
                 if (!state4.value) {
                     Image(
                         painter = painterResource(R.drawable.icon_chevron_down_outline),
@@ -366,8 +385,6 @@ fun ContentCards() {
                 Spacer(modifier = Modifier.weight(1f))
 
                 //Todo----------------------------------------------------------------------------------------
-                val state5 = remember { mutableStateOf(false) }
-
                 if (!state5.value) {
                     Image(
                         painter = painterResource(R.drawable.icon_chevron_down_outline),
@@ -415,8 +432,6 @@ fun ContentCards() {
                 Spacer(modifier = Modifier.weight(1f))
 
                 //Todo----------------------------------------------------------------------------------------
-                val state6 = remember { mutableStateOf(false) }
-
                 if (!state6.value) {
                     Image(
                         painter = painterResource(R.drawable.icon_chevron_down_outline),
