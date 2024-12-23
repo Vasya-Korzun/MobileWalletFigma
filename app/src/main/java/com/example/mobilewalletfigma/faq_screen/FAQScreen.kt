@@ -18,6 +18,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
@@ -42,11 +44,8 @@ fun FaqScreen(innerPadding: PaddingValues) {
             .padding(innerPadding)
     ) {
         TopBar()
-        ContentCards(
-            onClick = {
+        ContentCards()
 
-            }
-        )
     }
 }
 
@@ -88,7 +87,7 @@ fun TopBar() {
 
 
 @Composable
-fun ContentCards(onClick: () -> Unit) {
+fun ContentCards() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -141,15 +140,31 @@ fun ContentCards(onClick: () -> Unit) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_down_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                        .clickable {
-                            onClick()
-                        }
-                )
+//Todo----------------------------------------------------------------------------------------
+                val state1 = remember { mutableStateOf(false) }
+
+                if (!state1.value) {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_down_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state1.value = true
+                            }
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_up_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state1.value = false
+                            }
+                    )
+                }
+//Todo----------------------------------------------------------------------------------------
             }
             Row(
                 modifier = Modifier
@@ -174,12 +189,31 @@ fun ContentCards(onClick: () -> Unit) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_down_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                )
+                //Todo----------------------------------------------------------------------------------------
+                val state2 = remember { mutableStateOf(false) }
+
+                if (!state2.value) {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_down_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state2.value = true
+                            }
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_up_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state2.value = false
+                            }
+                    )
+                }
+//Todo----------------------------------------------------------------------------------------
             }
             Row(
                 modifier = Modifier
@@ -204,12 +238,31 @@ fun ContentCards(onClick: () -> Unit) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_down_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                )
+                //Todo----------------------------------------------------------------------------------------
+                val state3 = remember { mutableStateOf(false) }
+
+                if (!state3.value) {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_down_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state3.value = true
+                            }
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_up_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state3.value = false
+                            }
+                    )
+                }
+//Todo----------------------------------------------------------------------------------------
             }
 
         }
@@ -263,12 +316,31 @@ fun ContentCards(onClick: () -> Unit) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_down_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                )
+                //Todo----------------------------------------------------------------------------------------
+                val state4 = remember { mutableStateOf(false) }
+
+                if (!state4.value) {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_down_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state4.value = true
+                            }
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_up_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state4.value = false
+                            }
+                    )
+                }
+//Todo----------------------------------------------------------------------------------------
             }
             Row(
                 modifier = Modifier
@@ -293,12 +365,31 @@ fun ContentCards(onClick: () -> Unit) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_down_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                )
+                //Todo----------------------------------------------------------------------------------------
+                val state5 = remember { mutableStateOf(false) }
+
+                if (!state5.value) {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_down_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state5.value = true
+                            }
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_up_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state5.value = false
+                            }
+                    )
+                }
+//Todo----------------------------------------------------------------------------------------
             }
             Row(
                 modifier = Modifier
@@ -323,12 +414,31 @@ fun ContentCards(onClick: () -> Unit) {
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_down_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                )
+                //Todo----------------------------------------------------------------------------------------
+                val state6 = remember { mutableStateOf(false) }
+
+                if (!state6.value) {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_down_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state6.value = true
+                            }
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.icon_chevron_up_outline),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(alignment = Alignment.CenterVertically)
+                            .clickable {
+                                state6.value = false
+                            }
+                    )
+                }
+//Todo----------------------------------------------------------------------------------------
             }
 
         }
