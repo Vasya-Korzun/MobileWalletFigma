@@ -12,17 +12,18 @@ data class FAQState(
             cardAndSafetyQuestion = listOf(
                 Question(
                     "Вопрос 1",
-                    "AAAAAAAAAAAA"
+                    "Ответ на вопрос 1"
                 ),
                 Question(
                     "Вопрос 2",
-                    "BBBBBBBBBBB"
+                    "Ответ на вопрос 2"
                 ),
                 Question(
                     "Вопрос 3",
-                    "CCCCCCCCCCCC"
+                    "Ответ на вопрос 3"
                 ),
-            ),
+
+                ),
         )
     }
 }
@@ -34,11 +35,9 @@ sealed interface PartialStateChange {
 
     data class Input(val questionNumbers: String) : PartialStateChange {
         override fun reduce(viewState: FAQState): FAQState {
-            //Todo
-
 
             return viewState.copy(
-//                cardQuestionNumbers = questionNumbers
+
             )
         }
     }

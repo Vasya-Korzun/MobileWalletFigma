@@ -24,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,7 +38,6 @@ import com.example.mobilewalletfigma.faq_screen.FAQIntent
 import com.example.mobilewalletfigma.faq_screen.FAQState
 import com.example.mobilewalletfigma.faq_screen.Question
 import com.example.mobilewalletfigma.ui.theme.ButtonColorFaq
-import com.example.mobilewalletfigma.ui.theme.ContentColor
 import com.example.mobilewalletfigma.ui.theme.GrayFaq
 import com.example.mobilewalletfigma.ui.theme.QuestionFaqText
 import com.example.mobilewalletfigma.ui.theme.TextButtonColor
@@ -73,8 +73,14 @@ fun FaqScreen(
             )
         }
         items(viewState.cardAndSafetyQuestion.size) { index ->
+            val style = when (index) {
+                viewState.cardAndSafetyQuestion.indices.first -> ItemStyle.TOP
+                viewState.cardAndSafetyQuestion.indices.last -> ItemStyle.BOTTOM
+                else -> ItemStyle.MIDDLE
+            }
             QuestionItem(
-                question = viewState.cardAndSafetyQuestion[index]
+                question = viewState.cardAndSafetyQuestion[index],
+                style = style
             )
         }
         item {
@@ -95,10 +101,15 @@ fun FaqScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
         }
-
         items(viewState.cardAndSafetyQuestion.size) { index ->
+            val style = when (index) {
+                viewState.cardAndSafetyQuestion.indices.first -> ItemStyle.TOP
+                viewState.cardAndSafetyQuestion.indices.last -> ItemStyle.BOTTOM
+                else -> ItemStyle.MIDDLE
+            }
             QuestionItem(
-                question = viewState.cardAndSafetyQuestion[index]
+                question = viewState.cardAndSafetyQuestion[index],
+                style = style
             )
         }
         item {
@@ -164,9 +175,15 @@ fun TopBar() {
     }
 }
 
+enum class ItemStyle {
+    TOP, MIDDLE, BOTTOM,
+}
 
 @Composable
-fun QuestionItem(question: Question) {
+fun QuestionItem(
+    question: Question,
+    style: ItemStyle
+) {
 
     val isOpen = remember { mutableStateOf(false) }
 
@@ -174,9 +191,13 @@ fun QuestionItem(question: Question) {
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = ContentColor,
-//                color = Red,
-                shape = RoundedCornerShape(12.dp)
+//                color = ContentColor,     //Todo size?????
+                color = Red,
+                shape = when (style) {
+                    ItemStyle.TOP -> RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
+                    ItemStyle.MIDDLE -> RoundedCornerShape(0.dp)
+                    ItemStyle.BOTTOM -> RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
+                }
             )
     ) {
         Row(
@@ -223,6 +244,19 @@ fun QuestionItem(question: Question) {
                         }
                 )
             }
+        }
+        if (isOpen.value) {
+            Text(
+                modifier = Modifier
+                    .padding(vertical = 16.dp, horizontal = 16.dp),
+                text = question.questionAnswer,
+                style = TextStyle(
+                    color = GrayFaq,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(400),
+                    lineHeight = 22.sp,
+                ),
+            )
         }
     }
 }
