@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,7 +24,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.faq_screen.FAQIntent
 import com.example.mobilewalletfigma.faq_screen.FAQState
+import com.example.mobilewalletfigma.faq_screen.Question
 import com.example.mobilewalletfigma.ui.theme.ButtonColorFaq
 import com.example.mobilewalletfigma.ui.theme.ContentColor
 import com.example.mobilewalletfigma.ui.theme.GrayFaq
@@ -49,14 +50,82 @@ fun FaqScreen(
 ) {
     LazyColumn(
         modifier = Modifier
+            .fillMaxSize()
             .padding(innerPadding)
+            .padding(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 50.dp)
     ) {
         item {
             TopBar()
-            ContentCards()
+            Spacer(modifier = Modifier.height(28.dp))
+        }
+        item {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(22.dp),
+                text = stringResource(R.string.card_faq),
+                style = TextStyle(
+                    color = GrayFaq,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(500),
+                    lineHeight = 22.sp,
+                ),
+            )
+        }
+        items(viewState.cardAndSafetyQuestion.size) { index ->
+            QuestionItem(
+                question = viewState.cardAndSafetyQuestion[index]
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(22.dp),
+                text = stringResource(R.string.safety_faq),
+                style = TextStyle(
+                    color = GrayFaq,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(500),
+                    lineHeight = 22.sp,
+                ),
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+        }
+
+        items(viewState.cardAndSafetyQuestion.size) { index ->
+            QuestionItem(
+                question = viewState.cardAndSafetyQuestion[index]
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = { },
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = ButtonColorFaq)
+            ) {
+                Text(
+                    stringResource(R.string.button_contact_support),
+                    style = TextStyle(
+                        color = TextButtonColor,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(600),
+                        lineHeight = 24.sp,
+                    )
+                )
+            }
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
@@ -78,14 +147,13 @@ fun TopBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp)
-            .padding(horizontal = 22.dp, vertical = 16.dp)
+            .height(24.dp)
     ) {
         Image(
             painter = painterResource(R.drawable.icon_arrow_back_outline),
             contentDescription = "",
-            modifier = Modifier
         )
+        Spacer(Modifier.width(8.dp))
         Image(
             painter = painterResource(R.drawable.icon_title_faq),
             contentDescription = "",
@@ -98,386 +166,65 @@ fun TopBar() {
 
 
 @Composable
-fun ContentCards() {
-    val state1 = remember { mutableStateOf(false) }
-    val state2 = remember { mutableStateOf(false) }
-    val state3 = remember { mutableStateOf(false) }
-    val state4 = remember { mutableStateOf(false) }
-    val state5 = remember { mutableStateOf(false) }
-    val state6 = remember { mutableStateOf(false) }
+fun QuestionItem(question: Question) {
 
+    val isOpen = remember { mutableStateOf(false) }
 
-    Column(
+    Column(  //Todo         Column????????????
         modifier = Modifier
-            .fillMaxSize()
-            .padding(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 50.dp)
-    ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(22.dp),
-            text = stringResource(R.string.card_faq),
-            style = TextStyle(
-                color = GrayFaq,
-                fontSize = 14.sp,
-                fontWeight = FontWeight(500),
-                lineHeight = 22.sp,
-            ),
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = ContentColor,
-                    shape = RoundedCornerShape(12.dp)
-                )
-        ) {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(54.dp)
-            ) {
-
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .wrapContentWidth()
-                        .height(22.dp),
-                    text = stringResource(R.string.card_faq_question1),
-                    style = TextStyle(
-                        color = QuestionFaqText,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight(500),
-                        lineHeight = 22.sp,
-                    ),
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-//Todo----------------------------------------------------------------------------------------
-                if (!state1.value) {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_down_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state1.value = true
-                            }
-                    )
-                } else {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_up_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state1.value = false
-                            }
-                    )
-                }
-//Todo----------------------------------------------------------------------------------------
-            }
-            if (state1.value) {
-                Text(
-                    text = "Hello Kotlin!askcsnnvkdjvndkvbdhjvdvbkjsnvsjkvvbdhjbvnsvbhvjhdvbdvdb" +
-                            "sjndknvdvbhdbvhdjvbdhjbdfhbffjbnfbkfgjnbgfkbgnfgjbnfbnfkbfknsnvbdkvndvdkvndkjv" +
-                            "djknvjdkvnjkdfvkdfkmvdf",
-                    color = Black
-                )
-            }
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(54.dp)
-            ) {
-
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .wrapContentWidth()
-                        .height(22.dp),
-                    text = stringResource(R.string.card_faq_question2),
-                    style = TextStyle(
-                        color = QuestionFaqText,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight(500),
-                        lineHeight = 22.sp,
-                    ),
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                //Todo----------------------------------------------------------------------------------------
-                if (!state2.value) {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_down_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state2.value = true
-                            }
-                    )
-                } else {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_up_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state2.value = false
-                            }
-                    )
-                }
-//Todo----------------------------------------------------------------------------------------
-            }
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(54.dp)
-            ) {
-
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .wrapContentWidth()
-                        .height(22.dp),
-                    text = stringResource(R.string.card_faq_question3),
-                    style = TextStyle(
-                        color = QuestionFaqText,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight(500),
-                        lineHeight = 22.sp,
-                    ),
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                //Todo----------------------------------------------------------------------------------------
-                if (!state3.value) {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_down_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state3.value = true
-                            }
-                    )
-                } else {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_up_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state3.value = false
-                            }
-                    )
-                }
-//Todo----------------------------------------------------------------------------------------
-            }
-
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(22.dp),
-            text = stringResource(R.string.safety_faq),
-            style = TextStyle(
-                color = GrayFaq,
-                fontSize = 14.sp,
-                fontWeight = FontWeight(500),
-                lineHeight = 22.sp,
-            ),
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = ContentColor,
-                    shape = RoundedCornerShape(12.dp)
-                )
-        ) {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(54.dp)
-            ) {
-
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .wrapContentWidth()
-                        .height(22.dp),
-                    text = stringResource(R.string.card_faq_question1),
-                    style = TextStyle(
-                        color = QuestionFaqText,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight(500),
-                        lineHeight = 22.sp,
-                    ),
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                //Todo----------------------------------------------------------------------------------------
-                if (!state4.value) {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_down_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state4.value = true
-                            }
-                    )
-                } else {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_up_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state4.value = false
-                            }
-                    )
-                }
-//Todo----------------------------------------------------------------------------------------
-            }
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(54.dp)
-            ) {
-
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .wrapContentWidth()
-                        .height(22.dp),
-                    text = stringResource(R.string.card_faq_question2),
-                    style = TextStyle(
-                        color = QuestionFaqText,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight(500),
-                        lineHeight = 22.sp,
-                    ),
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                //Todo----------------------------------------------------------------------------------------
-                if (!state5.value) {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_down_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state5.value = true
-                            }
-                    )
-                } else {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_up_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state5.value = false
-                            }
-                    )
-                }
-//Todo----------------------------------------------------------------------------------------
-            }
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(54.dp)
-            ) {
-
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .wrapContentWidth()
-                        .height(22.dp),
-                    text = stringResource(R.string.card_faq_question3),
-                    style = TextStyle(
-                        color = QuestionFaqText,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight(500),
-                        lineHeight = 22.sp,
-                    ),
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                //Todo----------------------------------------------------------------------------------------
-                if (!state6.value) {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_down_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state6.value = true
-                            }
-                    )
-                } else {
-                    Image(
-                        painter = painterResource(R.drawable.icon_chevron_up_outline),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .align(alignment = Alignment.CenterVertically)
-                            .clickable {
-                                state6.value = false
-                            }
-                    )
-                }
-//Todo----------------------------------------------------------------------------------------
-            }
-
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = { },
-            shape = RoundedCornerShape(12.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = ButtonColorFaq)
-        ) {
-            Text(
-                stringResource(R.string.button_contact_support),
-                style = TextStyle(
-                    color = TextButtonColor,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight(600),
-                    lineHeight = 24.sp,
-                )
+            .fillMaxWidth()
+            .background(
+                color = ContentColor,
+//                color = Red,
+                shape = RoundedCornerShape(12.dp)
             )
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+                .height(54.dp)
+        ) {
+
+            Text(
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+                    .wrapContentWidth()
+                    .height(22.dp),
+                text = question.questionNumber,
+                style = TextStyle(
+                    color = QuestionFaqText,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(500),
+                    lineHeight = 22.sp,
+                ),
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            if (!isOpen.value) {
+                Image(
+                    painter = painterResource(R.drawable.icon_chevron_down_outline),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .align(alignment = Alignment.CenterVertically)
+                        .clickable {
+                            isOpen.value = true
+                        }
+                )
+            } else {
+                Image(
+                    painter = painterResource(R.drawable.icon_chevron_up_outline),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .align(alignment = Alignment.CenterVertically)
+                        .clickable {
+                            isOpen.value = false
+                        }
+                )
+            }
         }
     }
 }
+
 
