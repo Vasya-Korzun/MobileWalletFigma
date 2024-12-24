@@ -38,6 +38,7 @@ import com.example.mobilewalletfigma.faq_screen.FAQIntent
 import com.example.mobilewalletfigma.faq_screen.FAQState
 import com.example.mobilewalletfigma.faq_screen.Question
 import com.example.mobilewalletfigma.ui.theme.ButtonColorFaq
+import com.example.mobilewalletfigma.ui.theme.ContentColor
 import com.example.mobilewalletfigma.ui.theme.GrayFaq
 import com.example.mobilewalletfigma.ui.theme.QuestionFaqText
 import com.example.mobilewalletfigma.ui.theme.TextButtonColor
@@ -187,12 +188,11 @@ fun QuestionItem(
 
     val isOpen = remember { mutableStateOf(false) }
 
-    Column(  //Todo         Column????????????
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-//                color = ContentColor,     //Todo size?????
-                color = Red,
+                color = ContentColor,
                 shape = when (style) {
                     ItemStyle.TOP -> RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
                     ItemStyle.MIDDLE -> RoundedCornerShape(0.dp)
