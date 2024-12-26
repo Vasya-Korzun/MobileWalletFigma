@@ -1,5 +1,6 @@
 package com.example.mobilewalletfigma.faq_screen
 
+import androidx.compose.runtime.Immutable
 import com.example.testfigma1.base.MviIntent
 import com.example.testfigma1.base.MviSingleEvent
 import com.example.testfigma1.base.MviViewState
@@ -9,48 +10,27 @@ data class FAQState(
 ) : MviViewState {
     companion object {
         fun initial() = FAQState(
-            cardAndSafetyQuestion = listOf(
-                Question(
-                    "Что такое Mobile Wallet?",
-                    "Мобильное приложение от ОсОО «Мобильный кошелек» лицензированный платежной компании, которое позволяет пользователям переводить и оплачивать банковские и обязательные услуги физических лиц"
-                ),
-                Question(
-                    "Вопрос 2",
-                    "Ответ на вопрос 2"
-                ),
-                Question(
-                    "Вопрос 3",
-                    "Ответ на вопрос 3"
-                ),
-
-                ),
+            cardAndSafetyQuestion = emptyList()
         )
     }
 }
 
-
 sealed interface PartialStateChange {
-
     fun reduce(viewState: FAQState): FAQState
-
-    data class Input(val questionNumbers: String) : PartialStateChange {
+    data class Initial(val questions: List<Question>) : PartialStateChange {
         override fun reduce(viewState: FAQState): FAQState {
-
             return viewState.copy(
-
+                cardAndSafetyQuestion = questions
             )
         }
     }
-
-
 }
 
-
-sealed class FAQIntent : MviIntent {
-    data class Input(val questionNumbers: String) : FAQIntent()
+@Immutable
+sealed interface FAQIntent : MviIntent {
+    data object Initial : FAQIntent
 }
 
 sealed class FAQEvent : MviSingleEvent
 
-
-data class Question(val questionNumber: String, val questionAnswer: String)
+data class Question(val number: String, val answer: String)

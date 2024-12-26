@@ -4,13 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,19 +18,16 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.withContext
 
 class FAQFragment : Fragment(R.layout.fragment_faq) {
-
     val viewModel: FAQViewModel by viewModels()
-
     private var composeView: ComposeView? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         return ComposeView(requireContext()).also {
             composeView = it
         }
@@ -47,7 +40,6 @@ class FAQFragment : Fragment(R.layout.fragment_faq) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         composeView?.setContent {
             val intentChannel = remember { Channel<FAQIntent>(Channel.UNLIMITED) }
 
@@ -56,10 +48,14 @@ class FAQFragment : Fragment(R.layout.fragment_faq) {
                     intentChannel.trySend(intent).getOrThrow()
                 }
             }
+
             LaunchedEffect(Unit) {
                 withContext(Dispatchers.Main.immediate) {
                     intentChannel
                         .consumeAsFlow()
+                        .onStart {
+                            emit(FAQIntent.Initial)
+                        }
                         .onEach(viewModel::processIntent)
                         .collect()
                 }
@@ -67,18 +63,10 @@ class FAQFragment : Fragment(R.layout.fragment_faq) {
 
             val viewState by viewModel.viewState.collectAsStateWithLifecycle()
 
-            Scaffold(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentColor = Color.White
-            ) { innerPadding ->
-                FaqScreen(
-                    innerPadding,
-                    viewState = viewState,
-                    dispatch = dispatch
-                )
-            }
+            FaqScreen(
+                viewState = viewState,
+                dispatch = dispatch,
+            )
         }
     }
-
 }

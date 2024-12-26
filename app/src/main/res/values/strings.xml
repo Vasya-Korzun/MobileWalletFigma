@@ -17,6 +17,7 @@
 
 
 <!--    TODO: Lines for FAQ screen -->
+    <string name="text_faq">FAQ</string>
     <string name="card_faq">Карты</string>
     <string name="safety_faq">Безопасность</string>
     <string name="card_faq_question1">Вопрос 1</string>

@@ -46,8 +46,6 @@ fun CardInfo() {
                 .padding(start = 36.dp, end = 36.dp, top = 88.dp)
                 .height(40.dp)
                 .background(Blue300, RoundedCornerShape(12.dp))
-
-
         )
         Box(
             modifier = Modifier
@@ -56,8 +54,6 @@ fun CardInfo() {
                 .height(40.dp)
                 .background(Blue400, shape = RoundedCornerShape(14.dp))
         )
-
-
         Box(
             modifier = Modifier
                 .fillMaxWidth()
