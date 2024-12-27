@@ -1,23 +1,18 @@
-package com.example.mobilewalletfigma.main_screen
+package com.example.mobilewalletfigma.added_cards.add_card_error_screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.fragment.findNavController
 import com.example.mobilewalletfigma.R
-import com.example.mobilewalletfigma.main_screen.compose_ui.AddNewCardScreen
+import com.example.mobilewalletfigma.added_cards.add_card_error_screen.compose_ui.CardErrorScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
@@ -25,10 +20,9 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 
+class CardErrorFragment : Fragment(R.layout.fragment_card_error) {
 
-class MainFragment : Fragment(R.layout.fragment_main) {
-
-    val viewModel: MainViewModel by viewModels()
+    val viewModel: CardErrorViewModel by viewModels()
 
     private var composeView: ComposeView? = null
 
@@ -51,10 +45,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
 
         composeView?.setContent {
-            val intentChannel = remember { Channel<MainIntent>(Channel.UNLIMITED) }
+            val intentChannel = remember { Channel<CardErrorIntent>(Channel.UNLIMITED) }
 
             val dispatch = remember {
-                { intent: MainIntent ->
+                { intent: CardErrorIntent ->
                     intentChannel.trySend(intent).getOrThrow()
                 }
             }
@@ -69,20 +63,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             val viewState by viewModel.viewState.collectAsStateWithLifecycle()
 
-            Scaffold(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentColor = Color.White
-            ) { innerPadding ->
-                AddNewCardScreen(
-                    innerPadding,
-                    viewState = viewState,
-                    dispatch = dispatch,
-                    onButtonClick = {
-                        findNavController().navigate(R.id.cardSuccessFragment)
-                    }
-                )
-            }
+            CardErrorScreen(
+                viewState = viewState,
+                dispatch = dispatch
+            )
         }
     }
 

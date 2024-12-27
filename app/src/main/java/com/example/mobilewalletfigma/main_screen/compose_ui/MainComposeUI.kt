@@ -47,7 +47,7 @@ import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults.DATE_LENGTH
 import com.example.mobilewalletfigma.main_screen.transformations.NumberDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.VisaCardTransformation
-import com.example.mobilewalletfigma.ui.theme.Blue40
+import com.example.mobilewalletfigma.ui.theme.BackgroundCardSuccessColor
 import com.example.mobilewalletfigma.ui.theme.BorderColor
 import com.example.mobilewalletfigma.ui.theme.ButtonColor
 import com.example.mobilewalletfigma.ui.theme.FocusedBorderColor
@@ -68,6 +68,7 @@ fun AddNewCardScreen(
     innerPadding: PaddingValues,
     viewState: MainState,
     dispatch: (MainIntent) -> Unit,
+    onButtonClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -81,7 +82,7 @@ fun AddNewCardScreen(
         CardInfo(viewState, dispatch)
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            onClick = { },
+            onClick = { onButtonClick() },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()
@@ -138,7 +139,7 @@ fun CreditCard(viewState: MainState) {
         modifier = Modifier
             .padding(horizontal = 20.dp)
             .wrapContentHeight()
-            .background(color = Blue40, shape = RoundedCornerShape(16.dp))
+            .background(color = BackgroundCardSuccessColor, shape = RoundedCornerShape(16.dp))
     ) {
 
         Image(
@@ -391,7 +392,8 @@ fun PreviewAddNewCardScreen() {
         AddNewCardScreen(
             innerPadding,
             viewState = MainState.initial(),
-            dispatch = {}
+            dispatch = {},
+            onButtonClick = {}
         )
     }
 }

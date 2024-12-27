@@ -16,7 +16,7 @@
     <string name="button_add">Добавить</string>
 
 
-<!--    TODO: Lines for FAQ screen -->
+    <!--    TODO: Lines for FAQ screen -->
     <string name="text_faq">FAQ</string>
     <string name="card_faq">Карты</string>
     <string name="safety_faq">Безопасность</string>
@@ -26,5 +26,13 @@
     <string name="button_contact_support">Связаться с поддержкой</string>
 
 
-<!--    TODO: Lines for FAQ screen -->
+    <!--    TODO: Lines for CardSuccess screen -->
+    <string name="card_success_text1">Ваша карта добавлена!</string>
+    <string name="card_success_text2">Можете использовать ее для переводов</string>
+    <string name="button_home">На главную</string>
+
+    <!--    TODO: Lines for CardError screen -->
+    <string name="card_error_text1">Не удалось добавить</string>
+    <string name="card_error_text2">Повторите попытку позже</string>
+    <string name="button_repeat">Повторить попытку</string>
 </resources>
