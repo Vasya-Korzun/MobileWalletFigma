@@ -208,6 +208,7 @@ fun QuestionItem(
         }
         if (isOpen.value) {
             Text(
+                modifier = Modifier.padding(horizontal = 16.dp),
                 text = question.answer,
                 style = TextStyle(
                     color = GrayFaq,

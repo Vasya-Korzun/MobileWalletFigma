@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
     app:startDestination="@id/FAQFragment">
+    <!--    app:startDestination="@id/mainFragment">-->
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/mainFragment"-->
-    <!--        android:name="com.example.mobilewalletfigma.main_screen.MainFragment"-->
-    <!--        android:label="fragment_main"-->
-    <!--        tools:layout="@layout/fragment_main"/>-->
-    <fragment
-        android:id="@+id/FAQFragment"
-        android:name="com.example.mobilewalletfigma.faq_screen.FAQFragment"
-        android:label="FAQFragment"
-        tools:layout="@layout/fragment_faq" />
+<!--    <fragment-->
+<!--        android:id="@+id/mainFragment"-->
+<!--        android:name="com.example.mobilewalletfigma.main_screen.MainFragment"-->
+<!--        android:label="fragment_main"-->
+<!--        tools:layout="@layout/fragment_main" />-->
+
+        <fragment
+            android:id="@+id/FAQFragment"
+            android:name="com.example.mobilewalletfigma.faq_screen.FAQFragment"
+            android:label="FAQFragment"
+            tools:layout="@layout/fragment_faq" />
+
 </navigation>
