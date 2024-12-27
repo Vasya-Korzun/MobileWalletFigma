@@ -30,10 +30,8 @@ class FAQViewModel : AbstractMviViewModel<FAQIntent, FAQState, FAQEvent>() {
 
     private fun SharedFlow<FAQIntent>.toPartialStateChangeFlow(): Flow<PartialStateChange> {
         val initialQuestion = filterIsInstance<FAQIntent.Initial>().map {
-            println("VIVI qwe")
             PartialStateChange.Initial(Questions)
         }.shareWhileSubscribed()
-
         return merge(
             initialQuestion
         )

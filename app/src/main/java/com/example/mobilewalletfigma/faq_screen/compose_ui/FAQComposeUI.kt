@@ -117,7 +117,6 @@ fun FaqScreen(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewFaqScreen() {
@@ -196,27 +195,16 @@ fun QuestionItem(
                 ),
             )
             Spacer(modifier = Modifier.weight(1f))
-            if (!isOpen.value) {
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_down_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                        .clickable {
-                            isOpen.value = true
-                        }
-                )
-            } else {
-                Image(
-                    painter = painterResource(R.drawable.icon_chevron_up_outline),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterVertically)
-                        .clickable {
-                            isOpen.value = false
-                        }
-                )
-            }
+            Image(
+                painter = if (!isOpen.value) painterResource(R.drawable.icon_chevron_down_outline)
+                else painterResource(R.drawable.icon_chevron_up_outline),
+                contentDescription = "",
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterVertically)
+                    .clickable {
+                        isOpen.value = !isOpen.value
+                    }
+            )
         }
         if (isOpen.value) {
             Text(
