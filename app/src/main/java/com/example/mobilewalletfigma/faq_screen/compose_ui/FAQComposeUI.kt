@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -33,9 +34,9 @@ import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.faq_screen.FAQIntent
 import com.example.mobilewalletfigma.faq_screen.FAQState
+import com.example.mobilewalletfigma.faq_screen.FAQViewModel.Companion.Questions
 import com.example.mobilewalletfigma.faq_screen.Question
 import com.example.mobilewalletfigma.ui.theme.ButtonColorFaq
-import com.example.mobilewalletfigma.ui.theme.ContentColor
 import com.example.mobilewalletfigma.ui.theme.GrayFaq
 import com.example.mobilewalletfigma.ui.theme.QuestionFaqText
 import com.example.mobilewalletfigma.ui.theme.TextButtonColor
@@ -143,8 +144,7 @@ fun TopBar() {
         Text(
             text = stringResource(R.string.text_faq),
             modifier = Modifier
-                .padding(start = 126.dp)
-                .align(Alignment.CenterVertically),
+                .padding(start = 126.dp),
             style = TextStyle(
                 color = QuestionFaqText,
                 fontSize = 16.sp,
@@ -169,7 +169,8 @@ fun QuestionItem(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = ContentColor,
+//                color = ContentColor,    //Todo
+                color = Color.Red,
                 shape = when (style) {
                     ItemStyle.TOP -> RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
                     ItemStyle.MIDDLE -> RoundedCornerShape(0.dp)
@@ -183,7 +184,6 @@ fun QuestionItem(
                 .fillMaxWidth()
                 .height(54.dp),
             verticalAlignment = Alignment.CenterVertically
-
         ) {
             Text(
                 text = question.number,
@@ -200,7 +200,6 @@ fun QuestionItem(
                 else painterResource(R.drawable.icon_chevron_up_outline),
                 contentDescription = "",
                 modifier = Modifier
-                    .align(alignment = Alignment.CenterVertically)
                     .clickable {
                         isOpen.value = !isOpen.value
                     }
@@ -208,7 +207,8 @@ fun QuestionItem(
         }
         if (isOpen.value) {
             Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp),
                 text = question.answer,
                 style = TextStyle(
                     color = GrayFaq,
@@ -217,6 +217,10 @@ fun QuestionItem(
                     lineHeight = 22.sp,
                 ),
             )
+            if (question.answer == Questions[Questions.size - 1].answer     //Todo ???????????????
+            ) {
+                Spacer(modifier = Modifier.height(20.dp))
+            }
         }
     }
 }

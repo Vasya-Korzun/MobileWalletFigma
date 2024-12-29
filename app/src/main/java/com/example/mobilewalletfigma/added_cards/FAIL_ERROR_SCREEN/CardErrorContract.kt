@@ -1,4 +1,4 @@
-package com.example.mobilewalletfigma.added_cards.add_card_error_screen
+package com.example.mobilewalletfigma.added_cards.FAIL_ERROR_SCREEN
 
 import com.example.testfigma1.base.MviIntent
 import com.example.testfigma1.base.MviSingleEvent

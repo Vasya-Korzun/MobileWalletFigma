@@ -41,10 +41,6 @@ class CardSuccessViewModel : AbstractMviViewModel<CardSuccessIntent, CardSuccess
                 PartialStateChange.InputValidityPeriod(intent.validityPeriod)
             }.shareWhileSubscribed()
 
-        val initialFlowCardCvv = filterIsInstance<CardSuccessIntent.InputCardCvv>().map { intent ->
-            PartialStateChange.InputCardCvv(intent.cardCvv)
-        }.shareWhileSubscribed()
-
         val initialFlowCardHolder =
             filterIsInstance<CardSuccessIntent.InputCardHolder>().map { intent ->
                 PartialStateChange.InputCardHolder(intent.cardHolder)
@@ -53,7 +49,6 @@ class CardSuccessViewModel : AbstractMviViewModel<CardSuccessIntent, CardSuccess
         return merge(
             initialFlowCardNumber,
             initialFlowValidityPeriod,
-            initialFlowCardCvv,
             initialFlowCardHolder,
         )
     }

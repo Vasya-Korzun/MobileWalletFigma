@@ -3,21 +3,22 @@ package com.example.mobilewalletfigma.added_cards.add_card_success_screen
 import com.example.testfigma1.base.MviIntent
 import com.example.testfigma1.base.MviSingleEvent
 import com.example.testfigma1.base.MviViewState
+import java.io.Serializable
 
 data class CardSuccessState(
     val cardNumber: String,
     val validityPeriod: String,
-    val cardCvv: String,
     val cardHolder: String,
-) : MviViewState {
+    val isError: Boolean
+
+) : MviViewState, Serializable {
     companion object {
         fun initial() = CardSuccessState(
             cardNumber = "",
             validityPeriod = "",
-            cardCvv = "",
             cardHolder = "",
-
-            )
+            isError = false
+        )
     }
 }
 
@@ -44,15 +45,6 @@ sealed interface PartialStateChange {
         }
     }
 
-    data class InputCardCvv(val cardCvv: String) : PartialStateChange {
-        override fun reduce(viewState: CardSuccessState): CardSuccessState {
-
-            return viewState.copy(
-                cardCvv = cardCvv
-            )
-        }
-    }
-
     data class InputCardHolder(val cardHolder: String) : PartialStateChange {
         override fun reduce(viewState: CardSuccessState): CardSuccessState {
 
@@ -68,8 +60,8 @@ sealed interface PartialStateChange {
 sealed interface CardSuccessIntent : MviIntent {
     data class InputCardNumber(val cardNumber: String) : CardSuccessIntent
     data class InputCardValidityPeriod(val validityPeriod: String) : CardSuccessIntent
-    data class InputCardCvv(val cardCvv: String) : CardSuccessIntent
     data class InputCardHolder(val cardHolder: String) : CardSuccessIntent
 }
 
 sealed class CardSuccessEvent : MviSingleEvent
+

@@ -1,4 +1,4 @@
-package com.example.mobilewalletfigma.added_cards.add_card_error_screen.compose_ui
+package com.example.mobilewalletfigma.added_cards.FAIL_ERROR_SCREEN.compose_ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,8 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
-import com.example.mobilewalletfigma.added_cards.add_card_error_screen.CardErrorIntent
-import com.example.mobilewalletfigma.added_cards.add_card_error_screen.CardErrorState
+import com.example.mobilewalletfigma.added_cards.FAIL_ERROR_SCREEN.CardErrorIntent
+import com.example.mobilewalletfigma.added_cards.FAIL_ERROR_SCREEN.CardErrorState
 import com.example.mobilewalletfigma.ui.theme.BackgroundCardErrorColor
 import com.example.mobilewalletfigma.ui.theme.ButtonColor
 import com.example.mobilewalletfigma.ui.theme.InfoText1

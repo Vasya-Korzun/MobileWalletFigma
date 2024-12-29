@@ -1,4 +1,4 @@
-package com.example.mobilewalletfigma.added_cards.add_card_error_screen
+package com.example.mobilewalletfigma.added_cards.FAIL_ERROR_SCREEN
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mobilewalletfigma.R
-import com.example.mobilewalletfigma.added_cards.add_card_error_screen.compose_ui.CardErrorScreen
+import com.example.mobilewalletfigma.added_cards.FAIL_ERROR_SCREEN.compose_ui.CardErrorScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect

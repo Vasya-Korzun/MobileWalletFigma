@@ -1,4 +1,4 @@
-package com.example.mobilewalletfigma.added_cards.add_card_error_screen
+package com.example.mobilewalletfigma.added_cards.FAIL_ERROR_SCREEN
 
 import androidx.lifecycle.viewModelScope
 import com.example.testfigma1.base.AbstractMviViewModel

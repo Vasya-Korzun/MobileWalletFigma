@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.fragment.findNavController
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.main_screen.compose_ui.AddNewCardScreen
 import kotlinx.coroutines.Dispatchers
@@ -79,7 +78,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     viewState = viewState,
                     dispatch = dispatch,
                     onButtonClick = {
-                        findNavController().navigate(R.id.cardSuccessFragment)
+//                        findNavController().navigate(R.id.cardSuccessFragment)
                     }
                 )
             }
