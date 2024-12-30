@@ -23,7 +23,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -34,9 +33,9 @@ import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.faq_screen.FAQIntent
 import com.example.mobilewalletfigma.faq_screen.FAQState
-import com.example.mobilewalletfigma.faq_screen.FAQViewModel.Companion.Questions
 import com.example.mobilewalletfigma.faq_screen.Question
 import com.example.mobilewalletfigma.ui.theme.ButtonColorFaq
+import com.example.mobilewalletfigma.ui.theme.ContentColor
 import com.example.mobilewalletfigma.ui.theme.GrayFaq
 import com.example.mobilewalletfigma.ui.theme.QuestionFaqText
 import com.example.mobilewalletfigma.ui.theme.TextButtonColor
@@ -169,20 +168,19 @@ fun QuestionItem(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-//                color = ContentColor,    //Todo
-                color = Color.Red,
+                color = ContentColor,
                 shape = when (style) {
                     ItemStyle.TOP -> RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
                     ItemStyle.MIDDLE -> RoundedCornerShape(0.dp)
                     ItemStyle.BOTTOM -> RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
                 }
             )
+            .padding(vertical = 16.dp)
     ) {
         Row(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
-                .fillMaxWidth()
-                .height(54.dp),
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -206,6 +204,7 @@ fun QuestionItem(
             )
         }
         if (isOpen.value) {
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 modifier = Modifier
                     .padding(horizontal = 16.dp),
@@ -217,10 +216,6 @@ fun QuestionItem(
                     lineHeight = 22.sp,
                 ),
             )
-            if (question.answer == Questions[Questions.size - 1].answer     //Todo ???????????????
-            ) {
-                Spacer(modifier = Modifier.height(20.dp))
-            }
         }
     }
 }
