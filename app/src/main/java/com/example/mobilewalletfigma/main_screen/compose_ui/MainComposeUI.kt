@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -65,42 +64,50 @@ fun getRandomColor(): Color {
 
 @Composable
 fun AddNewCardScreen(
-    innerPadding: PaddingValues,
     viewState: MainState,
     dispatch: (MainIntent) -> Unit,
-    onButtonClick: () -> Unit
+    onButtonClick: (String, String, String) -> Unit,
+    cardNumber: String,
+    validityPeriod: String,
+    cardHolder: String
 ) {
-    Column(
+    Scaffold(
         modifier = Modifier
-            .padding(innerPadding)
-            .background(getRandomColor())
-    ) {
-        AddCard()
-        Spacer(modifier = Modifier.height(12.dp))
-        CreditCard(viewState)
-        Spacer(modifier = Modifier.height(24.dp))
-        CardInfo(viewState, dispatch)
-        Spacer(modifier = Modifier.weight(1f))
-        Button(
-            onClick = { onButtonClick() },
-            shape = RoundedCornerShape(12.dp),
+            .fillMaxSize(),
+        contentColor = White
+    ) { innerPadding ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .padding(horizontal = 20.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = ButtonColor)
+                .padding(innerPadding)
+                .background(getRandomColor())
         ) {
-            Text(
-                stringResource(R.string.button_add),
-                style = TextStyle(
-                    color = TextButtonColor,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight(600),
-                    lineHeight = 24.sp,
+            AddCard()
+            Spacer(modifier = Modifier.height(12.dp))
+            CreditCard(viewState)
+            Spacer(modifier = Modifier.height(24.dp))
+            CardInfo(viewState, dispatch)
+            Spacer(modifier = Modifier.weight(1f))
+            Button(
+                onClick = { onButtonClick(cardNumber, validityPeriod, cardHolder) },
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(horizontal = 20.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = ButtonColor)
+            ) {
+                Text(
+                    stringResource(R.string.button_add),
+                    style = TextStyle(
+                        color = TextButtonColor,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(600),
+                        lineHeight = 24.sp,
+                    )
                 )
-            )
+            }
+            Spacer(modifier = Modifier.height(50.dp))
         }
-        Spacer(modifier = Modifier.height(50.dp))
     }
 }
 
@@ -385,16 +392,14 @@ fun CardInfo(viewState: MainState, dispatch: (MainIntent) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewAddNewCardScreen() {
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        contentColor = White
-    ) { innerPadding ->
-        AddNewCardScreen(
-            innerPadding,
-            viewState = MainState.initial(),
-            dispatch = {},
-            onButtonClick = {}
-        )
-    }
+    AddNewCardScreen(
+        viewState = MainState.initial(),
+        dispatch = {},
+        onButtonClick = { _: String, _: String, _: String -> },
+        cardNumber = "",
+        validityPeriod = "",
+        cardHolder = ""
+    )
 }
+
 

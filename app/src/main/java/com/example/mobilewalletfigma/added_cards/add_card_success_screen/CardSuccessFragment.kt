@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.added_cards.add_card_success_screen.compose_ui.CardSuccessScreen
 import kotlinx.coroutines.Dispatchers
@@ -65,7 +66,13 @@ class CardSuccessFragment : Fragment(R.layout.fragment_card_success) {
 
             CardSuccessScreen(
                 viewState = viewState,
-                dispatch = dispatch
+                dispatch = dispatch,
+                onButtonClickBack = {
+                    findNavController().popBackStack()
+                },
+                textCardNumber = CardSuccessFragmentArgs.fromBundle(requireArguments()).cardNumber,
+                textValidityPeriod = CardSuccessFragmentArgs.fromBundle(requireArguments()).validityPeriod,
+                textCardHolder = CardSuccessFragmentArgs.fromBundle(requireArguments()).cardHolder,
             )
         }
     }

@@ -46,10 +46,16 @@ class CardSuccessViewModel : AbstractMviViewModel<CardSuccessIntent, CardSuccess
                 PartialStateChange.InputCardHolder(intent.cardHolder)
             }.shareWhileSubscribed()
 
+        val initialIsError =
+            filterIsInstance<CardSuccessIntent.InputIsError>().map { intent ->
+                PartialStateChange.InputIsError(intent.isError)
+            }.shareWhileSubscribed()
+
         return merge(
             initialFlowCardNumber,
             initialFlowValidityPeriod,
             initialFlowCardHolder,
+            initialIsError
         )
     }
 

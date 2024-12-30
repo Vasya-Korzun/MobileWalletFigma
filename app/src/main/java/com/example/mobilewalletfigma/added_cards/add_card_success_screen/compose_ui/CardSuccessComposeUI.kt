@@ -43,6 +43,10 @@ import com.example.mobilewalletfigma.ui.theme.TextButtonColor
 fun CardSuccessScreen(
     viewState: CardSuccessState,
     dispatch: (CardSuccessIntent) -> Unit,
+    onButtonClickBack: () -> Unit,
+    textCardNumber: String,
+    textValidityPeriod: String,
+    textCardHolder: String
 ) {
     Scaffold(
         modifier = Modifier
@@ -59,11 +63,11 @@ fun CardSuccessScreen(
                     .fillMaxSize()
                     .padding(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 50.dp)
             ) {
-                CreditCard()
+                CreditCard(textCardNumber, textValidityPeriod, textCardHolder)
                 Spacer(modifier = Modifier.height(48.dp))
                 Info()
                 Spacer(modifier = Modifier.weight(1f))
-                CardButton()
+                CardButton(onButtonClickBack)
             }
         }
     }
@@ -74,7 +78,11 @@ fun CardSuccessScreen(
 fun PreviewCardSuccessScreen() {
     CardSuccessScreen(
         viewState = CardSuccessState.initial(),
-        dispatch = {}
+        dispatch = {},
+        onButtonClickBack = {},
+        textCardNumber = stringResource(R.string.t_label1),
+        textCardHolder = stringResource(R.string.t_label2),
+        textValidityPeriod = stringResource(R.string.t_label3),
     )
 }
 
@@ -96,7 +104,11 @@ fun TopBar() {
 }
 
 @Composable
-fun CreditCard() {
+fun CreditCard(
+    textCardNumber: String,
+    textValidityPeriod: String,
+    textCardHolder: String
+) {
     Box(
         modifier = Modifier
             .padding(horizontal = 26.dp)
@@ -118,7 +130,7 @@ fun CreditCard() {
             modifier = Modifier.padding(top = 75.dp)
         ) {
             Text(
-                text = stringResource(R.string.t_label1),
+                text = textCardNumber,
                 style = TextStyle(
                     fontWeight = FontWeight(400),
                     fontSize = 13.sp,
@@ -131,7 +143,7 @@ fun CreditCard() {
             Spacer(modifier = Modifier.height(26.6.dp))
             Row(modifier = Modifier.padding(horizontal = 16.4.dp)) {
                 Text(
-                    text = stringResource(R.string.t_label2),
+                    text = textCardHolder,
                     style = TextStyle(
                         color = Text40,
                         fontSize = 10.sp,
@@ -142,7 +154,7 @@ fun CreditCard() {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
-                    text = stringResource(R.string.t_label3),
+                    text = textValidityPeriod,
                     style = TextStyle(
                         color = Text40,
                         fontSize = 10.sp,
@@ -189,9 +201,9 @@ fun Info() {
 }
 
 @Composable
-fun CardButton() {
+fun CardButton(onButtonClickBack: () -> Unit) {
     Button(
-        onClick = { },
+        onClick = { onButtonClickBack() },
         shape = RoundedCornerShape(12.dp),
         modifier = Modifier
             .fillMaxWidth()

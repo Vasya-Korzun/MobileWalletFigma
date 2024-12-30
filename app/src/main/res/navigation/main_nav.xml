@@ -3,27 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/FAQFragment">
+    app:startDestination="@id/mainFragment">
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/FAQFragment"-->
+    <!--        android:name="com.example.mobilewalletfigma.faq_screen.FAQFragment"-->
+    <!--        android:label="fragment_faq"-->
+    <!--        tools:layout="@layout/fragment_faq" />-->
 
     <fragment
-        android:id="@+id/FAQFragment"
-        android:name="com.example.mobilewalletfigma.faq_screen.FAQFragment"
-        android:label="fragment_faq"
-        tools:layout="@layout/fragment_faq" />
-
-    <!--    <fragment-->
-    <!--        android:id="@+id/mainFragment"-->
-    <!--        android:name="com.example.mobilewalletfigma.main_screen.MainFragment"-->
-    <!--        android:label="fragment_main"-->
-    <!--        tools:layout="@layout/fragment_main" >-->
-    <!--        <action-->
-    <!--            android:id="@+id/action_mainFragment_to_cardSuccessFragment"-->
-    <!--            app:destination="@id/cardSuccessFragment" />-->
-    <!--    </fragment>-->
-    <!--    <fragment-->
-    <!--        android:id="@+id/cardSuccessFragment"-->
-    <!--        android:name="com.example.mobilewalletfigma.added_cards.add_card_success_screen.CardSuccessFragment"-->
-    <!--        android:label="CardSuccessFragment" />-->
+        android:id="@+id/mainFragment"
+        android:name="com.example.mobilewalletfigma.main_screen.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_cardSuccessFragment"
+            app:destination="@id/cardSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardSuccessFragment"
+        android:name="com.example.mobilewalletfigma.added_cards.add_card_success_screen.CardSuccessFragment"
+        android:label="CardSuccessFragment" >
+        <argument
+            android:name="cardNumber"
+            app:argType="string" />
+        <argument
+            android:name="validityPeriod"
+            app:argType="string" />
+        <argument
+            android:name="cardHolder"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

@@ -17,11 +17,9 @@ data class MainState(
             validityPeriod = "",
             cardCvv = "",
             cardHolder = "",
-
-            )
+        )
     }
 }
-
 
 sealed interface PartialStateChange {
 
@@ -64,7 +62,6 @@ sealed interface PartialStateChange {
     }
 
 }
-
 
 sealed interface MainIntent : MviIntent {
     data class InputCardNumber(val cardNumber: String) : MainIntent

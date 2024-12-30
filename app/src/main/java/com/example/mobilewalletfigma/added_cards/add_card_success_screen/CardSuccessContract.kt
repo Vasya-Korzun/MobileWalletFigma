@@ -54,6 +54,15 @@ sealed interface PartialStateChange {
         }
     }
 
+    data class InputIsError(val isError: Boolean) : PartialStateChange {
+        override fun reduce(viewState: CardSuccessState): CardSuccessState {
+
+            return viewState.copy(
+                isError = isError
+            )
+        }
+    }
+
 }
 
 
@@ -61,6 +70,7 @@ sealed interface CardSuccessIntent : MviIntent {
     data class InputCardNumber(val cardNumber: String) : CardSuccessIntent
     data class InputCardValidityPeriod(val validityPeriod: String) : CardSuccessIntent
     data class InputCardHolder(val cardHolder: String) : CardSuccessIntent
+    data class InputIsError(val isError: Boolean) : CardSuccessIntent
 }
 
 sealed class CardSuccessEvent : MviSingleEvent

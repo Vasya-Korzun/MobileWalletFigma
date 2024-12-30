@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.main_screen.compose_ui.AddNewCardScreen
 import kotlinx.coroutines.Dispatchers
@@ -68,21 +65,22 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             val viewState by viewModel.viewState.collectAsStateWithLifecycle()
 
-            Scaffold(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentColor = Color.White
-            ) { innerPadding ->
-                AddNewCardScreen(
-                    innerPadding,
-                    viewState = viewState,
-                    dispatch = dispatch,
-                    onButtonClick = {
-//                        findNavController().navigate(R.id.cardSuccessFragment)
-                    }
-                )
-            }
+            AddNewCardScreen(
+                viewState = viewState,
+                dispatch = dispatch,
+                onButtonClick = { cardNumber, validityPeriod, cardHolder ->
+                    findNavController().navigate(
+                        MainFragmentDirections.actionMainFragmentToCardSuccessFragment(
+                            cardNumber, validityPeriod, cardHolder
+                        )
+                    )
+                },
+                viewState.cardNumber,
+                viewState.validityPeriod,
+                viewState.cardHolder
+            )
         }
     }
-
 }
+
+
