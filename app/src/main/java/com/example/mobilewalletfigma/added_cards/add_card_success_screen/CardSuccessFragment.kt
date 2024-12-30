@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.added_cards.add_card_success_screen.compose_ui.CardSuccessScreen
 import kotlinx.coroutines.Dispatchers
@@ -19,12 +20,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.withContext
 
 class CardSuccessFragment : Fragment(R.layout.fragment_card_success) {
 
     val viewModel: CardSuccessViewModel by viewModels()
-
+    private val args by navArgs<CardSuccessFragmentArgs>()
     private var composeView: ComposeView? = null
 
     override fun onCreateView(
@@ -53,10 +55,14 @@ class CardSuccessFragment : Fragment(R.layout.fragment_card_success) {
                     intentChannel.trySend(intent).getOrThrow()
                 }
             }
+
             LaunchedEffect(Unit) {
                 withContext(Dispatchers.Main.immediate) {
                     intentChannel
                         .consumeAsFlow()
+                        .onStart {
+                            emit(CardSuccessIntent.Initial(args.cardHolder))
+                        }
                         .onEach(viewModel::processIntent)
                         .collect()
                 }
@@ -71,8 +77,6 @@ class CardSuccessFragment : Fragment(R.layout.fragment_card_success) {
                     findNavController().popBackStack()
                 },
                 textCardNumber = CardSuccessFragmentArgs.fromBundle(requireArguments()).cardNumber,
-                textValidityPeriod = CardSuccessFragmentArgs.fromBundle(requireArguments()).validityPeriod,
-                textCardHolder = CardSuccessFragmentArgs.fromBundle(requireArguments()).cardHolder,
             )
         }
     }

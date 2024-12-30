@@ -31,31 +31,31 @@ class CardSuccessViewModel : AbstractMviViewModel<CardSuccessIntent, CardSuccess
 
     private fun SharedFlow<CardSuccessIntent>.toPartialStateChangeFlow(): Flow<PartialStateChange> {
 
-        val initialFlowCardNumber =
-            filterIsInstance<CardSuccessIntent.InputCardNumber>().map { intent ->
-                PartialStateChange.InputCardNumber(intent.cardNumber)
-            }.shareWhileSubscribed()
-
-        val initialFlowValidityPeriod =
-            filterIsInstance<CardSuccessIntent.InputCardValidityPeriod>().map { intent ->
-                PartialStateChange.InputValidityPeriod(intent.validityPeriod)
-            }.shareWhileSubscribed()
-
-        val initialFlowCardHolder =
-            filterIsInstance<CardSuccessIntent.InputCardHolder>().map { intent ->
-                PartialStateChange.InputCardHolder(intent.cardHolder)
-            }.shareWhileSubscribed()
-
-        val initialIsError =
-            filterIsInstance<CardSuccessIntent.InputIsError>().map { intent ->
-                PartialStateChange.InputIsError(intent.isError)
-            }.shareWhileSubscribed()
+//        val initialFlowCardNumber =
+//            filterIsInstance<CardSuccessIntent.InputCardNumber>().map { intent ->
+//                PartialStateChange.InputCardNumber(intent.cardNumber)
+//            }.shareWhileSubscribed()
+//
+//        val initialFlowValidityPeriod =
+//            filterIsInstance<CardSuccessIntent.InputCardValidityPeriod>().map { intent ->
+//                PartialStateChange.InputValidityPeriod(intent.validityPeriod)
+//            }.shareWhileSubscribed()
+//
+//        val initialFlowCardHolder =
+//            filterIsInstance<CardSuccessIntent.InputCardHolder>().map { intent ->
+//                PartialStateChange.InputCardHolder(intent.cardHolder)
+//            }.shareWhileSubscribed()
+//
+//        val initialIsError =
+//            filterIsInstance<CardSuccessIntent.InputIsError>().map { intent ->
+//                PartialStateChange.InputIsError(intent.isError)
+//            }.shareWhileSubscribed()
 
         return merge(
-            initialFlowCardNumber,
-            initialFlowValidityPeriod,
-            initialFlowCardHolder,
-            initialIsError
+//            initialFlowCardNumber,
+//            initialFlowValidityPeriod,
+//            initialFlowCardHolder,
+//            initialIsError
         )
     }
 

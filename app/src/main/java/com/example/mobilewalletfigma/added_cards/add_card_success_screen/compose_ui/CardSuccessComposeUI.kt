@@ -32,6 +32,9 @@ import androidx.compose.ui.unit.sp
 import com.example.mobilewalletfigma.R
 import com.example.mobilewalletfigma.added_cards.add_card_success_screen.CardSuccessIntent
 import com.example.mobilewalletfigma.added_cards.add_card_success_screen.CardSuccessState
+import com.example.mobilewalletfigma.main_screen.extension_fun.changeCardHolder
+import com.example.mobilewalletfigma.main_screen.extension_fun.changeCardNumber
+import com.example.mobilewalletfigma.main_screen.extension_fun.changeValidityPeriod
 import com.example.mobilewalletfigma.ui.theme.BackgroundCardSuccessColor
 import com.example.mobilewalletfigma.ui.theme.ButtonColor
 import com.example.mobilewalletfigma.ui.theme.InfoText1
@@ -44,9 +47,7 @@ fun CardSuccessScreen(
     viewState: CardSuccessState,
     dispatch: (CardSuccessIntent) -> Unit,
     onButtonClickBack: () -> Unit,
-    textCardNumber: String,
-    textValidityPeriod: String,
-    textCardHolder: String
+    textCardNumber: String
 ) {
     Scaffold(
         modifier = Modifier
@@ -63,7 +64,7 @@ fun CardSuccessScreen(
                     .fillMaxSize()
                     .padding(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 50.dp)
             ) {
-                CreditCard(textCardNumber, textValidityPeriod, textCardHolder)
+                CreditCard(viewState, textCardNumber)
                 Spacer(modifier = Modifier.height(48.dp))
                 Info()
                 Spacer(modifier = Modifier.weight(1f))
@@ -81,8 +82,6 @@ fun PreviewCardSuccessScreen() {
         dispatch = {},
         onButtonClickBack = {},
         textCardNumber = stringResource(R.string.t_label1),
-        textCardHolder = stringResource(R.string.t_label2),
-        textValidityPeriod = stringResource(R.string.t_label3),
     )
 }
 
@@ -105,9 +104,8 @@ fun TopBar() {
 
 @Composable
 fun CreditCard(
+    viewState: CardSuccessState,
     textCardNumber: String,
-    textValidityPeriod: String,
-    textCardHolder: String
 ) {
     Box(
         modifier = Modifier
@@ -130,7 +128,7 @@ fun CreditCard(
             modifier = Modifier.padding(top = 75.dp)
         ) {
             Text(
-                text = textCardNumber,
+                text = textCardNumber.changeCardNumber(),
                 style = TextStyle(
                     fontWeight = FontWeight(400),
                     fontSize = 13.sp,
@@ -143,7 +141,7 @@ fun CreditCard(
             Spacer(modifier = Modifier.height(26.6.dp))
             Row(modifier = Modifier.padding(horizontal = 16.4.dp)) {
                 Text(
-                    text = textCardHolder,
+                    text = viewState.cardHolder.changeCardHolder(),
                     style = TextStyle(
                         color = Text40,
                         fontSize = 10.sp,
@@ -154,7 +152,7 @@ fun CreditCard(
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
-                    text = textValidityPeriod,
+                    text = viewState.validityPeriod.changeValidityPeriod(),
                     style = TextStyle(
                         color = Text40,
                         fontSize = 10.sp,

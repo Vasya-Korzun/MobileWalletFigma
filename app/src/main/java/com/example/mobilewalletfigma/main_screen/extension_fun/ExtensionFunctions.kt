@@ -1,5 +1,9 @@
 package com.example.mobilewalletfigma.main_screen.extension_fun
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.mobilewalletfigma.R
+
 /** Extension fun for Card Number */
 fun String.changeCardNumber(): String {
     // Step 1: Заполним строку символами "Х" до длины 19 без пробелов
@@ -14,21 +18,21 @@ fun String.changeCardNumber(): String {
 
 
 /** Extension fun for Card Holder */
-fun String.changeCardHolder(newStr: String): String {
-    val result = newStr.ifEmpty { this }
-    return result
+@Composable
+fun String.changeCardHolder(): String {
+    val maskStr = stringResource(R.string.t_label2)
+    return this.ifEmpty { maskStr }
 }
 
-
 /** Extension fun for ValidityPeriod */
-fun String.changeValidityPeriod(newStr: String): String {
-    val result: String
-    if (newStr.isEmpty()) {
-        result = this
+@Composable
+fun String.changeValidityPeriod(): String {
+    val maskString = stringResource(R.string.t_label3)
+    if (this.isEmpty()) {
+        return maskString
     } else {
-        val paddedString = newStr.padEnd(4)
+        val paddedString = this.padEnd(4)
         val groups = paddedString.chunked(2)
-        result = groups.joinToString("/")
+        return groups.joinToString("/")
     }
-    return result
 }

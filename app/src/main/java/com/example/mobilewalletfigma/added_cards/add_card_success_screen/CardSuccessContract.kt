@@ -67,10 +67,7 @@ sealed interface PartialStateChange {
 
 
 sealed interface CardSuccessIntent : MviIntent {
-    data class InputCardNumber(val cardNumber: String) : CardSuccessIntent
-    data class InputCardValidityPeriod(val validityPeriod: String) : CardSuccessIntent
-    data class InputCardHolder(val cardHolder: String) : CardSuccessIntent
-    data class InputIsError(val isError: Boolean) : CardSuccessIntent
+    data class Initial(val cardNumber: String) : CardSuccessIntent
 }
 
 sealed class CardSuccessEvent : MviSingleEvent

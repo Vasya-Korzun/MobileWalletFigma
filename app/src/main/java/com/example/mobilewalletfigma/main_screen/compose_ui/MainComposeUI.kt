@@ -56,7 +56,6 @@ import com.example.mobilewalletfigma.ui.theme.TextButtonColor
 import com.example.mobilewalletfigma.ui.theme.TextPlaceholder
 import kotlin.random.Random
 
-
 fun getRandomColor(): Color {
     val random = Random
     return Color(random.nextInt(256), random.nextInt(256), random.nextInt(256))
@@ -184,7 +183,7 @@ fun CreditCard(viewState: MainState) {
 
             Row(modifier = Modifier.padding(horizontal = 20.dp)) {
                 Text(
-                    text = stringResource(R.string.t_label2).changeCardHolder(viewState.cardHolder),
+                    text = viewState.cardHolder.changeCardHolder(),
                     style = TextStyle(
                         color = Text40,
                         fontSize = 12.sp,
@@ -196,7 +195,7 @@ fun CreditCard(viewState: MainState) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
-                    text = stringResource(R.string.t_label3).changeValidityPeriod(viewState.validityPeriod),
+                    text = viewState.validityPeriod.changeValidityPeriod(),
                     style = TextStyle(
                         color = Text40,
                         fontSize = 12.sp,
