@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 
     alias(libs.plugins.kotlin.safeargs)
+//    alias(libs.plugins.android.hilt)
+//    alias(libs.plugins.kotlin.kapt)
+
 }
 
 android {
@@ -57,6 +60,13 @@ dependencies {
     implementation(libs.androidx.navigationFragment)
     implementation(libs.androidx.navigationUI)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.transition)
+    implementation(libs.androidx.transition)
+    implementation(libs.androidx.transition)
+    implementation(libs.androidx.espresso.core)
+//    implementation(libs.androidx.hilt)
+//    implementation(libs.androidx.kapt)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

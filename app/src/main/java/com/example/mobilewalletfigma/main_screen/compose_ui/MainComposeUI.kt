@@ -400,5 +400,3 @@ fun PreviewAddNewCardScreen() {
         cardHolder = ""
     )
 }
-
-

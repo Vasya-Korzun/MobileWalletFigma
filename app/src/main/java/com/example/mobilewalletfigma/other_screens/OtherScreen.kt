@@ -1,4 +1,4 @@
-package com.example.mobilewalletfigma.other_screen
+package com.example.mobilewalletfigma.other_screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

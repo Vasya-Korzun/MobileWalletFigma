@@ -16,7 +16,7 @@
     <string name="button_add">Добавить</string>
 
 
-    <!--    TODO: Lines for FAQ screen -->
+    <!--    TODO: Lines for FAQ screen: -->
     <string name="text_faq">FAQ</string>
     <string name="card_faq">Карты</string>
     <string name="safety_faq">Безопасность</string>
@@ -26,13 +26,26 @@
     <string name="button_contact_support">Связаться с поддержкой</string>
 
 
-    <!--    TODO: Lines for CardSuccess screen -->
+    <!--    TODO: Lines for CardSuccess screen: -->
     <string name="card_success_text1">Ваша карта добавлена!</string>
     <string name="card_success_text2">Можете использовать ее для переводов</string>
     <string name="button_home">На главную</string>
 
-    <!--    TODO: Lines for CardError screen -->
+    <!--    TODO: Lines for CardError screen: -->
     <string name="card_error_text1">Не удалось добавить</string>
     <string name="card_error_text2">Повторите попытку позже</string>
     <string name="button_repeat">Повторить попытку</string>
+
+
+    <!--    TODO: Lines for CardAddition screen: -->
+    <string name="card_additional_add_card">Добавить карту</string>
+    <string name="card_additional_card_number">Номер карты</string>
+    <string name="card_additional_enter_card_number">Введите номер карты</string>
+    <string name="card_additional_card_holder">Держатель карты</string>
+    <string name="card_additional_enter_card_holder">Введите держателя карты</string>
+    <string name="card_additional_card_holder_placeholder">Полное имя</string>
+    <string name="card_additional_card_verify_period">Срок действия</string>
+    <string name="card_additional_card_verify_period_placeholder">ММ/ГГ</string>
+    <string name="card_additional_enter_card_verify_period">Введите срок действия</string>
+    <string name="card_additional_add">Добавить</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.mobilewalletfigma.main_screen
 
+import com.example.mobilewalletfigma.utils.STRING_EMPTY
 import com.example.testfigma1.base.MviIntent
 import com.example.testfigma1.base.MviSingleEvent
 import com.example.testfigma1.base.MviViewState
@@ -13,10 +14,10 @@ data class MainState(
 ) : MviViewState {
     companion object {
         fun initial() = MainState(
-            cardNumber = "",
-            validityPeriod = "",
-            cardCvv = "",
-            cardHolder = "",
+            cardNumber = STRING_EMPTY,
+            validityPeriod = STRING_EMPTY,
+            cardCvv = STRING_EMPTY,
+            cardHolder = STRING_EMPTY,
         )
     }
 }

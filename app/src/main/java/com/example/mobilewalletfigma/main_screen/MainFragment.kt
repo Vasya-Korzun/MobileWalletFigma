@@ -11,9 +11,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.fragment.findNavController
 import com.example.mobilewalletfigma.R
-import com.example.mobilewalletfigma.main_screen.compose_ui.AddNewCardScreen
+import com.example.mobilewalletfigma.card_addition_screen.compose.CardAdditionScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
@@ -65,20 +64,26 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             val viewState by viewModel.viewState.collectAsStateWithLifecycle()
 
-            AddNewCardScreen(
-                viewState = viewState,
-                dispatch = dispatch,
-                onButtonClick = { cardNumber, validityPeriod, cardHolder ->
-                    findNavController().navigate(
-                        MainFragmentDirections.actionMainFragmentToCardSuccessFragment(
-                            cardNumber, validityPeriod, cardHolder
-                        )
-                    )
-                },
-                viewState.cardNumber,
-                viewState.validityPeriod,
-                viewState.cardHolder
+//            AddNewCardScreen(
+//                viewState = viewState,
+//                dispatch = dispatch,
+//                onButtonClick = { cardNumber, validityPeriod, cardHolder ->
+//                    findNavController().navigate(
+//                        MainFragmentDirections.actionMainFragmentToCardSuccessFragment(
+//                            cardNumber, validityPeriod, cardHolder
+//                        )
+//                    )
+//                },
+//                viewState.cardNumber,
+//                viewState.validityPeriod,
+//                viewState.cardHolder
+//            )
+
+            CardAdditionScreen(
+                viewState,
+                dispatch
             )
+
         }
     }
 }
