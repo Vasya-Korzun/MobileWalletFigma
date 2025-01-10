@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.NumberDefaults
 import com.example.mobilewalletfigma.main_screen.transformations.VisaCardTransformation
 
@@ -50,6 +51,7 @@ fun InputField(
     errorText: String? = null,
     isPassword: Boolean = false,
     onCardNumberInput: Boolean = false,
+    onCardValidityPeriodInput: Boolean = false,
     leadingIcon: Int? = null,
 //    iconsTint: Color = iconSecondary,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -120,6 +122,7 @@ fun InputField(
             visualTransformation = when {
                 isPassword && !isPasswordVisible -> PasswordVisualTransformation('\u2022')
                 onCardNumberInput -> VisaCardTransformation(NumberDefaults.CARD_NUMBER_MASK)
+                onCardValidityPeriodInput->VisaCardTransformation(DateDefaults.DATE_MASK)
                 else -> VisualTransformation.None
             },
 //            visualTransformation = VisaCardTransformation(NumberDefaults.CARD_NUMBER_MASK),

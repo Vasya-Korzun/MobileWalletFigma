@@ -4,8 +4,9 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 
     alias(libs.plugins.kotlin.safeargs)
-//    alias(libs.plugins.android.hilt)
-//    alias(libs.plugins.kotlin.kapt)
+
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.devtools.ksp)
 
 }
 
@@ -44,6 +45,8 @@ android {
     }
 }
 
+
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -64,8 +67,9 @@ dependencies {
     implementation(libs.androidx.transition)
     implementation(libs.androidx.transition)
     implementation(libs.androidx.espresso.core)
-//    implementation(libs.androidx.hilt)
-//    implementation(libs.androidx.kapt)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
 
     testImplementation(libs.junit)

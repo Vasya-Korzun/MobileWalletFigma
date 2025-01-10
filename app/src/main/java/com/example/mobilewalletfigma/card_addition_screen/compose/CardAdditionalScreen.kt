@@ -207,6 +207,7 @@ fun CardInfoFields(viewState: MainState, dispatch: (MainIntent) -> Unit) {
             label = stringResource(R.string.card_additional_card_verify_period),
             enabled = true,
             isError = false,
+            onCardValidityPeriodInput = true,
 //            placeholder = stringResource(R.string.card_additional_card_holder_placeholder),
             placeholder = "ММ/ГГ",
             errorText = if (viewState.validityPeriod.isEmpty()) {
