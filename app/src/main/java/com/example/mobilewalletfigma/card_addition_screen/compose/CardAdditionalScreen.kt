@@ -34,8 +34,11 @@ import com.example.mobilewalletfigma.main_screen.MainIntent
 import com.example.mobilewalletfigma.main_screen.MainState
 import com.example.mobilewalletfigma.main_screen.extension_fun.changeCardNumber
 import com.example.mobilewalletfigma.main_screen.extension_fun.changeValidityPeriod
+import com.example.mobilewalletfigma.main_screen.transformations.CarHolderDefaults.CARD_HOLDER_LENGTH
 import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults.DATE_LENGTH
+import com.example.mobilewalletfigma.main_screen.transformations.DateDefaults.DATE_MASK
 import com.example.mobilewalletfigma.main_screen.transformations.NumberDefaults.CARD_NUMBER_LENGTH
+import com.example.mobilewalletfigma.main_screen.transformations.NumberDefaults.CARD_NUMBER_MASK
 import com.example.mobilewalletfigma.ui.theme.BackgroundCardSuccessColor
 
 @Composable
@@ -159,7 +162,7 @@ fun CardInfoFields(viewState: MainState, dispatch: (MainIntent) -> Unit) {
             label = stringResource(R.string.card_additional_card_number),
             enabled = true,
             isError = false,
-            onCardNumberInput = true,
+            inputMask = CARD_NUMBER_MASK,
 //            placeholder = CARD_NUMBER_MASK,
             placeholder = "0000 0000 0000 0000",
             errorText = if (viewState.cardNumber.isEmpty()) {
@@ -178,7 +181,9 @@ fun CardInfoFields(viewState: MainState, dispatch: (MainIntent) -> Unit) {
         InputField(
             value = viewState.cardHolder,
             onValueChange = { newText ->
-                dispatch(MainIntent.InputCardHolder(newText))
+                if(newText.length<=CARD_HOLDER_LENGTH) {
+                    dispatch(MainIntent.InputCardHolder(newText))
+                }
             },
             label = stringResource(R.string.card_additional_card_holder),
             enabled = true,
@@ -207,7 +212,7 @@ fun CardInfoFields(viewState: MainState, dispatch: (MainIntent) -> Unit) {
             label = stringResource(R.string.card_additional_card_verify_period),
             enabled = true,
             isError = false,
-            onCardValidityPeriodInput = true,
+            inputMask = DATE_MASK,
 //            placeholder = stringResource(R.string.card_additional_card_holder_placeholder),
             placeholder = "ММ/ГГ",
             errorText = if (viewState.validityPeriod.isEmpty()) {
