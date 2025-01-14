@@ -136,7 +136,7 @@ fun TopBar() {
     ) {
         Image(
             modifier = Modifier.padding(horizontal = 20.dp),
-            painter = painterResource(R.drawable.icon_arrow_back_outline),
+            painter = painterResource(R.drawable.icon_arrow_back),
             contentDescription = "",
         )
         Spacer(Modifier.width(8.dp))

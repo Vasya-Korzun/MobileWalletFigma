@@ -75,6 +75,7 @@ fun FastTransferCard(operationStatus: OperationStatus) {
                         contentScale = ContentScale.FillWidth
                     )
                     Spacer(modifier = Modifier.weight(1f))
+                    CustomBottomSheet()
                     CardButton(operationStatus)
                 }
             }
@@ -85,7 +86,7 @@ fun FastTransferCard(operationStatus: OperationStatus) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewFastTransferCard() {
-    FastTransferCard(operationStatus = OperationStatus.DECLINE)
+    FastTransferCard(operationStatus = OperationStatus.InPROCESS)
 }
 
 @Composable
@@ -245,5 +246,8 @@ val CardInfoList = listOf(
 enum class OperationStatus {
     InPROCESS, SUCCESS, DECLINE
 }
+
+
+
 
 
